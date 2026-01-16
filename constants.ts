@@ -183,7 +183,7 @@ export const MENU_ITEMS: MenuItem[] = [
   { id: 'dr19', nameEn: 'Rift valley', nameAm: 'ሪፍት ቫሊ', price: 1700, category: 'Drinks' },
 
   // Alcohol Drinks(Bottle)
-  { id: 'ab1', nameEn: 'Champagne', nameAm: 'ሻምፓኝ', price: 10000, category: 'Alcohol Drinks(Bottle)', tags: ['Popular'] },
+  { id: 'ab1', nameEn: 'Champagne', nameAm: 'ሻምፓኝ', price: 10000, category: 'Alcohol Drinks(Bottle)' },
   { id: 'ab2', nameEn: 'Tequila', nameAm: 'ተኪላ', price: 12000, category: 'Alcohol Drinks(Bottle)' },
   { id: 'ab3', nameEn: 'Stolichnaya vodka (0.3 L)', nameAm: 'ስቶልችኒያ ቮድካ (0.3 ሊ)', price: 4000, category: 'Alcohol Drinks(Bottle)' },
   { id: 'ab4', nameEn: 'Stolichnaya vodka (0.5 L)', nameAm: 'ስቶልችኒያ ቮድካ (0.5 ሊ)', price: 6000, category: 'Alcohol Drinks(Bottle)' },
@@ -192,7 +192,7 @@ export const MENU_ITEMS: MenuItem[] = [
   { id: 'ab7', nameEn: 'Absolute vodka', nameAm: 'አብሰሉት ቮድካ', price: 10000, category: 'Alcohol Drinks(Bottle)' },
   { id: 'ab8', nameEn: 'Malibu', nameAm: 'ማሊቡ', price: 10000, category: 'Alcohol Drinks(Bottle)' },
   { id: 'ab9', nameEn: 'Winterpalace', nameAm: 'ዊንተር ፓላስ', price: 9000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab10', nameEn: 'Black label', nameAm: 'ብላክ ሌብል ጠርሙስ', price: 15000, category: 'Alcohol Drinks(Bottle)', tags: ['Popular'] },
+  { id: 'ab10', nameEn: 'Black label', nameAm: 'ብላክ ሌብል ጠርሙስ', price: 15000, category: 'Alcohol Drinks(Bottle)' },
   { id: 'ab11', nameEn: 'Double black label', nameAm: 'ደብል ብላክ ሌብል', price: 20000, category: 'Alcohol Drinks(Bottle)' },
   { id: 'ab12', nameEn: 'Gold label', nameAm: 'ጎልድ ሌብል', price: 20000, category: 'Alcohol Drinks(Bottle)' },
   { id: 'ab13', nameEn: 'Chivas', nameAm: 'ቺቫስ', price: 15000, category: 'Alcohol Drinks(Bottle)', tags: ['12 Years-old'] },
