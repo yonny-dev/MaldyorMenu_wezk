@@ -30,7 +30,7 @@ export const MENU_ITEMS: MenuItem[] = [
   { id: 'b4', nameEn: 'Fasting firfir', nameAm: 'የፆም ፍርፍር', price: 250, category: 'Breakfast', tags: ['Fasting'] },
   { id: 'b5', nameEn: 'Egg Sandwich', nameAm: 'እንቁላል ሳንዱች', price: 250, category: 'Breakfast' },
   { id: 'b6', nameEn: 'Egg with meat', nameAm: 'እንቁላል በስጋ', price: 400, category: 'Breakfast', tags: ['Meat'] },
-  { id: 'b7', nameEn: 'Chechebsa with Honey', nameAm: 'ጨጨብሳ በማር', price: 250, category: 'Breakfast', tags: ['Fasting', 'Popular] },
+  { id: 'b7', nameEn: 'Chechebsa with Honey', nameAm: 'ጨጨብሳ በማር', price: 250, category: 'Breakfast', tags: ['Fasting', 'Popular'] },
   { id: 'b8', nameEn: 'Chechebsa with Egg', nameAm: 'ጨጨብሳ በእንቁላል', price: 300, category: 'Breakfast' },
   { id: 'b9', nameEn: 'Fetira with honey', nameAm: 'ፈጢራ በማር', price: 250, category: 'Breakfast' },
   { id: 'b10', nameEn: 'Fetira with egg', nameAm: 'ፈጢራ በእንቁላል በማር', price: 300, category: 'Breakfast' },
@@ -76,7 +76,7 @@ export const MENU_ITEMS: MenuItem[] = [
   { id: 'pr2', nameEn: 'Spaghetti with meat', nameAm: 'ፓስታ በስጋ', price: 350, category: 'Spaghetti / Rice / Maccoroni', tags: ['Meat'] },
   { id: 'pr3', nameEn: 'Spaghetti with vegetable', nameAm: 'ፓስታ በአትክልት', price: 250, category: 'Spaghetti / Rice / Maccoroni', tags: ['Fasting'] },
   { id: 'pr4', nameEn: 'Rice with tomato', nameAm: 'ሩዝ በቲማቲም', price: 250, category: 'Spaghetti / Rice / Maccoroni', tags: ['Fasting'] },
-  { id: 'pr5', nameEn: 'Rice with meat', nameAm: 'ሩዝ በስጋ', price: 350, category: 'Spaghetti / Rice / Maccoroni', tags: ['Meat', 'Popular] },
+  { id: 'pr5', nameEn: 'Rice with meat', nameAm: 'ሩዝ በስጋ', price: 350, category: 'Spaghetti / Rice / Maccoroni', tags: ['Meat', 'Popular'] },
   { id: 'pr6', nameEn: 'Rice with vegetable', nameAm: 'ሩዝ በአትክልት', price: 250, category: 'Spaghetti / Rice / Maccoroni', tags: ['Fasting'] },
 
   // Sandwich Category
@@ -88,13 +88,13 @@ export const MENU_ITEMS: MenuItem[] = [
   { id: 'sw6', nameEn: 'French fries', nameAm: 'ችብስ', price: 250, category: 'Sandwich', tags: ['Fasting'] },
 
   // Wrap Category
-  { id: 'rp1', nameEn: 'Chicken Wrap', nameAm: 'ችክን ራፕ', price: 450, category: 'Rap', tags: ['Popular'] },
-  { id: 'rp2', nameEn: 'Beef Wrap', nameAm: 'ቢፍ ራፕ', price: 400, category: 'Rap', tags: ['Meat'] },
-  { id: 'rp3', nameEn: 'Veggie Wrap', nameAm: 'ቬጅቴብል ራፕ', price: 300, category: 'Rap', tags: ['Fasting'] },
+  { id: 'rp1', nameEn: 'Chicken Wrap', nameAm: 'ችክን ራፕ', price: 450, category: 'Wrap', tags: ['Popular'] },
+  { id: 'rp2', nameEn: 'Beef Wrap', nameAm: 'ቢፍ ራፕ', price: 400, category: 'Wrap', tags: ['Meat'] },
+  { id: 'rp3', nameEn: 'Veggie Wrap', nameAm: 'ቬጅቴብል ራፕ', price: 300, category: 'Wrap', tags: ['Fasting'] },
 
   // Steak Category
-  { id: 'st1', nameEn: 'Grilled steak', nameAm: 'ግሪል ስቴክ', price: 500, category: 'Stake', tags: ['Popular'] },
-  { id: 'st2', nameEn: 'Steak albismark', nameAm: 'ስቴክ አልቢስማርክ', price: 500, category: 'Stake' },
+  { id: 'st1', nameEn: 'Grilled steak', nameAm: 'ግሪል ስቴክ', price: 500, category: 'Steak', tags: ['Popular'] },
+  { id: 'st2', nameEn: 'Steak albismark', nameAm: 'ስቴክ አልቢስማርክ', price: 500, category: 'Steak' },
 
   // Curry Category
   { id: 'cy1', nameEn: 'Lamb curry', nameAm: 'ላምብ ኬሪ', price: 550, category: 'Curry', tags: ['Meat'] },
@@ -209,20 +209,20 @@ export const MENU_ITEMS: MenuItem[] = [
 
   // Continental Breakfast
   { id: 'cb1', nameEn: 'Scrambled Egg', nameAm: 'እንቁላል ፍርፍር', price: 250, category: 'Continental Breakfast', tags: ['For room customer only'] },
-  { id: 'cb2', nameEn: 'Omelet', nameAm: 'ኦምሌት', price: 250, category: 'Continental Breakfast', tags: ['For room customer only' },
-  { id: 'cb3', nameEn: 'French toast', nameAm: 'ፍሬንች ቶስት', price: 250, category: 'Continental Breakfast', tags: ['For room customer only' },
-  { id: 'cb4', nameEn: 'Enjera firfir', nameAm: 'እንጀራ ፍርፍር', price: 250, category: 'Continental Breakfast', tags: ['For room customer only' },
-  { id: 'cb5', nameEn: 'Egg sandwich', nameAm: 'እንቁላል ሳንዱች', price: 250, category: 'Continental Breakfast', tags: ['For room customer only' },
+  { id: 'cb2', nameEn: 'Omelet', nameAm: 'ኦምሌት', price: 250, category: 'Continental Breakfast', tags: ['For room customer only'] },
+  { id: 'cb3', nameEn: 'French toast', nameAm: 'ፍሬንች ቶስት', price: 250, category: 'Continental Breakfast', tags: ['For room customer only'] },
+  { id: 'cb4', nameEn: 'Enjera firfir', nameAm: 'እንጀራ ፍርፍር', price: 250, category: 'Continental Breakfast', tags: ['For room customer only'] },
+  { id: 'cb5', nameEn: 'Egg sandwich', nameAm: 'እንቁላል ሳንዱች', price: 250, category: 'Continental Breakfast', tags: ['For room customer only'] },
   { id: 'cb6', nameEn: 'Vegetable sandwich', nameAm: 'አትክልት ሳንዱች', price: 200, category: 'Continental Breakfast', tags: ['Fasting', 'For room customer only'] },
-  { id: 'cb7', nameEn: 'Pancake', nameAm: 'ፓን ኬክ', price: 250, category: 'Continental Breakfast', tags: ['For room customer only' },
-  { id: 'cb8', nameEn: 'Oats', nameAm: 'አጃ', price: 250, category: 'Continental Breakfast', tags: ['Fasting'], tags: ['For room customer only' },
+  { id: 'cb7', nameEn: 'Pancake', nameAm: 'ፓን ኬክ', price: 250, category: 'Continental Breakfast', tags: ['For room customer only'] },
+  { id: 'cb8', nameEn: 'Oats', nameAm: 'አጃ', price: 250, category: 'Continental Breakfast', tags: ['Fasting', 'For room customer only'] },
   { id: 'cb9', nameEn: 'Fetira with honey', nameAm: 'ፈጢራ በማር', price: 250, category: 'Continental Breakfast', tags: ['Fasting','For room customer only'] },
-  { id: 'cb10', nameEn: 'Fetira with egg & honey', nameAm: 'ፈጢራ በእንቁላል በማር', price: 300, category: 'Continental Breakfast', tags: ['For room customer only' },
-  { id: 'cb11', nameEn: 'Papaya juice', nameAm: 'ፓፓያ ጁስ', price: 200, category: 'Continental Breakfast', tags: ['For room customer only' },
-  { id: 'cb12', nameEn: 'Watermelon juice', nameAm: 'ሃብሃብ ጁስ', price: 200, category: 'Continental Breakfast', tags: ['For room customer only' },
-  { id: 'cb13', nameEn: 'Tea', nameAm: 'ሻይ', price: 40, category: 'Continental Breakfast', tags: ['For room customer only' },
-  { id: 'cb14', nameEn: 'Milk', nameAm: 'ወተት', price: 70, category: 'Continental Breakfast', tags: ['For room customer only' },
-  { id: 'cb15', nameEn: 'Coffee', nameAm: 'ቡና', price: 60, category: 'Continental Breakfast', tags: ['For room customer only' },
+  { id: 'cb10', nameEn: 'Fetira with egg & honey', nameAm: 'ፈጢራ በእንቁላል በማር', price: 300, category: 'Continental Breakfast', tags: ['For room customer only'] },
+  { id: 'cb11', nameEn: 'Papaya juice', nameAm: 'ፓፓያ ጁስ', price: 200, category: 'Continental Breakfast', tags: ['For room customer only'] },
+  { id: 'cb12', nameEn: 'Watermelon juice', nameAm: 'ሃብሃብ ጁስ', price: 200, category: 'Continental Breakfast', tags: ['For room customer only'] },
+  { id: 'cb13', nameEn: 'Tea', nameAm: 'ሻይ', price: 40, category: 'Continental Breakfast', tags: ['For room customer only'] },
+  { id: 'cb14', nameEn: 'Milk', nameAm: 'ወተት', price: 70, category: 'Continental Breakfast', tags: ['For room customer only'] },
+  { id: 'cb15', nameEn: 'Coffee', nameAm: 'ቡና', price: 60, category: 'Continental Breakfast', tags: ['For room customer only'] },
 
   // Extra Section
   { id: 'ot1', nameEn: 'Extra injera', nameAm: 'ተጨማሪ እንጀራ', price: 40, category: 'Extra' },
