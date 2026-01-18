@@ -41,13 +41,5 @@ A modern digital menu for Maldyor Hotel featuring **English/Amharic** translatio
 ## 🚀 Quick Start
 
 ```bash
-# Clone & install
-git clone [your-repo-url]
-npm install
-
-# Start development
-npm run dev
-# Open http://localhost:3000
-
-# Build for production
-npm run build
+# If you wanna check the site go to the following link
+https://maldyor-hotel-menu-updated.vercel.app/
