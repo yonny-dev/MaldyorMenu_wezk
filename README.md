@@ -1,45 +1,20 @@
-# 🏨 Maldyor Hotel Digital Menu
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-**"Traditional Flavors & Modern Elegance in Alamata"**
+# Run and deploy your AI Studio app
 
-[![Live Link](https://img.shields.io/badge/Live-Demo-ff3d2e?style=for-the-badge)](https://maldyor-hotel-menu-updated.vercel.app)
-[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat)](https://react.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat)](https://typescriptlang.org)
+This contains everything you need to run your app locally.
 
-## Premium Bilingual Menu System
+View your app in AI Studio: https://ai.studio/apps/drive/1tvsZft_P5Vc3UkzwFVeg5tnsHpmiLEgJ
 
-A modern digital menu for Maldyor Hotel featuring **English/Amharic** translations with authentic Ethiopian design aesthetics. Perfect for QR code scanning in restaurants and hotels.
+## Run Locally
 
-## ✨ Features
+**Prerequisites:**  Node.js
 
-- **Bilingual Support** - Full English & Amharic translations
-- **QR Code Ready** - Mobile-optimized for instant scanning
-- **19 Categories** - 180+ traditional & continental dishes
-- **Real-time Calculator** - Automatic price totaling
-- **Dietary Tags** - Vegetarian, Meat, Fish, Spicy, Popular indicators
----
 
-**📱 Tech Stack**
-
-- **Frontend:** HTML + React 19 + TypeScript
-- **Styling:** Tailwind CSS
-- **Build Tool:** Vite
-- **Hosting:** Vercel 
-
----
-
-💻 **Crafted with Passion by:**  **👨‍💻 Yonas Wagnew (Yonny-Dev)** 
-
-📬 **Let's Build Together**  
-→ **Email:** `Yonaswagnew20@gmail.com`  
-→ **Telegram:** `@yonnyw7`  
-→ **GitHub:** `@yonny-dev`  
-→ **Discord:** `@yonny_w`
-
-🚀 *Transforming Ethiopian hospitality through elegant code*
-
-## 🚀 Quick Start
-
-```bash
-# If you wanna check the site go to the following link
-https://maldyor-hotel-menu-updated.vercel.app/
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
