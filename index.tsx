@@ -3,9 +3,9 @@ import { createRoot } from 'react-dom/client';
 
 // --- TYPES ---
 type Category = 
-  | 'Breakfast' | 'Soup' | 'Salad' | 'Traditional Food' | 'Spaghetti / Rice / Maccoroni'
+  | 'Breakfast' | 'Soup' | 'Salad' | 'Traditional Food' | 'Pasta, Rice & Macaroni'
   | 'Sandwich' | 'Wrap' | 'Steak' | 'Curry' | 'Chicken' | 'Pizza' | 'Burger' | 'Fish'
-  | 'Juice & Shakes' | 'Hot Drinks' | 'Drinks' | 'Alcohol Drinks(Bottle)'
+  | 'Juice & Shakes' | 'Hot Drinks' | 'Drinks' | 'Alcohol Drinks'
   | 'Continental Breakfast' | 'Extra';
 
 interface MenuItem {
@@ -17,20 +17,25 @@ interface MenuItem {
   tags?: ('Vegetarian' | 'Spicy' | 'Meat' | 'Fish' | 'Popular' | 'Fasting' | 'Malt' | 'Beer' | 'Takeaway box' | '12 Years-old' | '15 Years-old' | '18 Years-old' | 'For room customer only')[];
 }
 
+// --- UTILS ---
+const formatPrice = (price: number) => {
+  return new Intl.NumberFormat('en-US').format(price);
+};
+
 // --- CONSTANTS ---
 const CATEGORIES: Category[] = [
-  'Breakfast', 'Soup', 'Salad', 'Traditional Food', 'Spaghetti / Rice / Maccoroni',
+  'Breakfast', 'Soup', 'Salad', 'Traditional Food', 'Pasta, Rice & Macaroni',
   'Sandwich', 'Wrap', 'Steak', 'Curry', 'Chicken', 'Pizza', 'Burger', 'Fish',
-  'Juice & Shakes', 'Hot Drinks', 'Drinks', 'Alcohol Drinks(Bottle)',
+  'Juice & Shakes', 'Hot Drinks', 'Drinks', 'Alcohol Drinks',
   'Continental Breakfast', 'Extra'
 ];
 
 const CATEGORY_EMOJIS: Record<Category, string> = {
   'Breakfast': '🍳', 'Soup': '🥣', 'Salad': '🥗', 'Traditional Food': '🥘',
-  'Spaghetti / Rice / Maccoroni': '🍝', 'Sandwich': '🥪', 'Wrap': '🌯',
+  'Pasta, Rice & Macaroni': '🍝', 'Sandwich': '🥪', 'Wrap': '🌯',
   'Steak': '🥩', 'Curry': '🍛', 'Chicken': '🍗', 'Pizza': '🍕', 'Burger': '🍔',
   'Fish': '🐟', 'Juice & Shakes': '🍹', 'Hot Drinks': '☕', 'Drinks': '🥤',
-  'Alcohol Drinks(Bottle)': '🥃', 'Continental Breakfast': '🥐', 'Extra': '➕'
+  'Alcohol Drinks': '🥃', 'Continental Breakfast': '🥐', 'Extra': '➕'
 };
 
 const MENU_ITEMS: MenuItem[] = [
@@ -50,20 +55,20 @@ const MENU_ITEMS: MenuItem[] = [
   { id: 'b13', nameEn: 'Meat firfir', nameAm: 'ስጋ ፍርፍር', price: 400, category: 'Breakfast', tags: ['Meat'] },
   { id: 'b14', nameEn: 'Bread firfir', nameAm: 'ዳቦ ፍርፍር', price: 200, category: 'Breakfast' },
 
-  // Soup Section (Standalone Category)
-  { id: 's1', nameEn: 'Vegetable soup', nameAm: 'አትክልት ሾርባ', price: 200, category: 'Soup',tags: ['Fasting', 'Popular'] },
+  // Soup Section
+  { id: 's1', nameEn: 'Vegetable soup', nameAm: 'አትክልት ሾርባ', price: 200, category: 'Soup', tags: ['Fasting', 'Popular'] },
   { id: 's2', nameEn: 'Minestrone soup', nameAm: 'ምስር ሾርባ', price: 200, category: 'Soup', tags: ['Fasting'] },
   { id: 's3', nameEn: 'Chicken soup', nameAm: 'ዶሮ ሾርባ', price: 300, category: 'Soup' },
   { id: 's4', nameEn: 'Fish soup', nameAm: 'አሳ ሾርባ', price: 300, category: 'Soup', tags: ['Fish'] },
   { id: 's5', nameEn: 'Spinach soup', nameAm: 'ቆስጣ ሾርባ', price: 200, category: 'Soup', tags: ['Fasting'] },
 
-  // Salad Section (Standalone Category)
+  // Salad Section
   { id: 'sl1', nameEn: 'Special salad', nameAm: 'ስፔሻል ሳላድ', price: 300, category: 'Salad', tags: ['Popular'] },
   { id: 'sl2', nameEn: 'Mixed salad', nameAm: 'ሚክስድ ሳላድ', price: 250, category: 'Salad', tags: ['Fasting'] },
   { id: 'sl3', nameEn: 'Chicken salad', nameAm: 'ችክን ሳላድ', price: 350, category: 'Salad' },
   { id: 'sl4', nameEn: 'Fruit punch', nameAm: 'ፍሩት ፓንች', price: 300, category: 'Salad', tags: ['Fasting'] },
 
-  // Traditional Food Section
+  // Traditional Food
   { id: 't1', nameEn: 'Lamp tibs', nameAm: 'የበግ ጥብስ', price: 500, category: 'Traditional Food', tags: ['Meat','Popular'] },
   { id: 't2', nameEn: 'Beef tibs', nameAm: 'ቢፍ ጥብስ', price: 450, category: 'Traditional Food', tags: ['Meat'] },
   { id: 't3', nameEn: 'Chikena tibs', nameAm: 'ጭቅና ጥብስ', price: 500, category: 'Traditional Food', tags: ['Meat'] },
@@ -82,15 +87,15 @@ const MENU_ITEMS: MenuItem[] = [
   { id: 't16', nameEn: 'Suf fitft', nameAm: 'ሱፍ ፍትፍት', price: 200, category: 'Traditional Food', tags: ['Fasting'] },
   { id: 't17', nameEn: 'Selit fift', nameAm: 'ሰሊጥ ፍትፍት', price: 200, category: 'Traditional Food', tags: ['Fasting'] },
 
-  // Spaghetti / Rice Section
-  { id: 'pr1', nameEn: 'Spaghetti with tomato', nameAm: 'ፓስታ በቲማቲም', price: 250, category: 'Spaghetti / Rice / Maccoroni', tags: ['Fasting','Popular'] },
-  { id: 'pr2', nameEn: 'Spaghetti with meat', nameAm: 'ፓስታ በስጋ', price: 350, category: 'Spaghetti / Rice / Maccoroni', tags: ['Meat'] },
-  { id: 'pr3', nameEn: 'Spaghetti with vegetable', nameAm: 'ፓስታ በአትክልት', price: 250, category: 'Spaghetti / Rice / Maccoroni', tags: ['Fasting'] },
-  { id: 'pr4', nameEn: 'Rice with tomato', nameAm: 'ሩዝ በቲማቲም', price: 250, category: 'Spaghetti / Rice / Maccoroni', tags: ['Fasting'] },
-  { id: 'pr5', nameEn: 'Rice with meat', nameAm: 'ሩዝ በስጋ', price: 350, category: 'Spaghetti / Rice / Maccoroni', tags: ['Meat', 'Popular'] },
-  { id: 'pr6', nameEn: 'Rice with vegetable', nameAm: 'ሩዝ በአትክልት', price: 250, category: 'Spaghetti / Rice / Maccoroni', tags: ['Fasting'] },
+  // Pasta, Rice & Macaroni
+  { id: 'pr1', nameEn: 'Spaghetti with tomato', nameAm: 'ፓስታ በቲማቲም', price: 250, category: 'Pasta, Rice & Macaroni', tags: ['Fasting','Popular'] },
+  { id: 'pr2', nameEn: 'Spaghetti with meat', nameAm: 'ፓስታ በስጋ', price: 350, category: 'Pasta, Rice & Macaroni', tags: ['Meat'] },
+  { id: 'pr3', nameEn: 'Spaghetti with vegetable', nameAm: 'ፓስታ በአትክልት', price: 250, category: 'Pasta, Rice & Macaroni', tags: ['Fasting'] },
+  { id: 'pr4', nameEn: 'Rice with tomato', nameAm: 'ሩዝ በቲማቲም', price: 250, category: 'Pasta, Rice & Macaroni', tags: ['Fasting'] },
+  { id: 'pr5', nameEn: 'Rice with meat', nameAm: 'ሩዝ በስጋ', price: 350, category: 'Pasta, Rice & Macaroni', tags: ['Meat', 'Popular'] },
+  { id: 'pr6', nameEn: 'Rice with vegetable', nameAm: 'ሩዝ በአትክልት', price: 250, category: 'Pasta, Rice & Macaroni', tags: ['Fasting'] },
 
-  // Sandwich Category
+  // Sandwich
   { id: 'sw1', nameEn: 'Egg sandwich', nameAm: 'እንቁላል ሳንዱች', price: 250, category: 'Sandwich' },
   { id: 'sw2', nameEn: 'Club sandwich', nameAm: 'ክለብ ሳንዱች', price: 400, category: 'Sandwich' },
   { id: 'sw3', nameEn: 'Fish sandwich', nameAm: 'አሳ ሳንዱች', price: 450, category: 'Sandwich', tags: ['Fish','Popular'] },
@@ -98,23 +103,23 @@ const MENU_ITEMS: MenuItem[] = [
   { id: 'sw5', nameEn: 'Veggie sandwich', nameAm: 'አትክልት ሳንዱች', price: 450, category: 'Sandwich' },
   { id: 'sw6', nameEn: 'French fries', nameAm: 'ችብስ', price: 250, category: 'Sandwich', tags: ['Fasting'] },
 
-  // Wrap Category
+  // Wrap
   { id: 'rp1', nameEn: 'Chicken Wrap', nameAm: 'ችክን ራፕ', price: 450, category: 'Wrap', tags: ['Popular'] },
   { id: 'rp2', nameEn: 'Beef Wrap', nameAm: 'ቢፍ ራፕ', price: 400, category: 'Wrap', tags: ['Meat'] },
   { id: 'rp3', nameEn: 'Veggie Wrap', nameAm: 'ቬጅቴብል ራፕ', price: 300, category: 'Wrap', tags: ['Fasting'] },
 
-  // Steak Category
+  // Steak
   { id: 'st1', nameEn: 'Grilled steak', nameAm: 'ግሪል ስቴክ', price: 500, category: 'Steak', tags: ['Popular'] },
   { id: 'st2', nameEn: 'Steak albismark', nameAm: 'ስቴክ አልቢስማርክ', price: 500, category: 'Steak' },
 
-  // Curry Category
+  // Curry
   { id: 'cy1', nameEn: 'Lamb curry', nameAm: 'ላምብ ኬሪ', price: 550, category: 'Curry', tags: ['Meat'] },
   { id: 'cy2', nameEn: 'Beef curry', nameAm: 'ቢፍ ኬሪ', price: 500, category: 'Curry', tags: ['Meat'] },
   { id: 'cy3', nameEn: 'Chicken curry', nameAm: 'ችክን ኬሪ', price: 550, category: 'Curry', tags: ['Popular'] },
   { id: 'cy5', nameEn: 'Stir fried fish', nameAm: 'ስቲር ፍራይድ ፊሽ', price: 550, category: 'Curry', tags: ['Fish'] },
   { id: 'cy6', nameEn: 'Stir fried beef', nameAm: 'ስቲር ፍራይድ ቢፍ', price: 550, category: 'Curry', tags: ['Meat'] },
 
-  // Chicken Category
+  // Chicken
   { id: 'ch1', nameEn: 'Chicken breast', nameAm: 'ችክን ብረስት', price: 550, category: 'Chicken' },
   { id: 'ch2', nameEn: 'Chicken leg', nameAm: 'ችክን ሌግ', price: 450, category: 'Chicken' },
   { id: 'ch3', nameEn: 'Full roasted chicken', nameAm: 'ሙሉ ዶሮ', price: 2400, category: 'Chicken', tags: ['Popular'] },
@@ -123,7 +128,7 @@ const MENU_ITEMS: MenuItem[] = [
   { id: 'ch6', nameEn: 'Chicken tender', nameAm: 'ችክን ቴንደር', price: 550, category: 'Chicken' },
   { id: 'ch7', nameEn: 'Stir fried chicken', nameAm: 'ስቲር ፍራይድ ችክን', price: 550, category: 'Chicken' },
 
-  // Pizza Category
+  // Pizza
   { id: 'pz6', nameEn: 'Maldyor special Pizza', nameAm: 'ማልድዮር ስፔሻል ፒዛ', price: 600, category: 'Pizza', tags: ['Popular'] },
   { id: 'pz1', nameEn: 'Beef pizza', nameAm: 'ቢፍ ፒዛ', price: 450, category: 'Pizza', tags: ['Meat'] },
   { id: 'pz2', nameEn: 'Margarita pizza', nameAm: 'ማርጋሪታ ፒዛ', price: 550, category: 'Pizza'},
@@ -131,118 +136,34 @@ const MENU_ITEMS: MenuItem[] = [
   { id: 'pz4', nameEn: 'Tuna Pizza', nameAm: 'ቱና ፒዛ', price: 550, category: 'Pizza', tags: ['Fish','Fasting','Popular'] },
   { id: 'pz5', nameEn: 'Chicken pizza', nameAm: 'ችክን ፒዛ', price: 550, category: 'Pizza' },
 
-  // Burger Category
+  // Burger
   { id: 'bg1', nameEn: 'Beef Burger', nameAm: 'ቢፍ በርገር', price: 450, category: 'Burger'},
   { id: 'bg2', nameEn: 'Cheese Burger', nameAm: 'ችዝ በርገር', price: 500, category: 'Burger'},
   { id: 'bg3', nameEn: 'Double Burger', nameAm: 'ደብል በርገር', price: 850, category: 'Burger'},
   { id: 'bg4', nameEn: 'Special Burger', nameAm: 'ስፔሻል በርገር', price: 600, category: 'Burger', tags: ['Popular'] },
 
-  // Fish Category
+  // Fish
   { id: 'fs1', nameEn: 'Fish goulash', nameAm: 'አሳ ጉላሽ', price: 500, category: 'Fish', tags: ['Fasting'] },
   { id: 'fs2', nameEn: 'Fish wet', nameAm: 'አሳ ወጥ', price: 450, category: 'Fish', tags: ['Fasting'] },
   { id: 'fs3', nameEn: 'Fried fish', nameAm: 'ፍራይድ ፊሽ', price: 500, category: 'Fish', tags: ['Fasting'] },
   { id: 'fs4', nameEn: 'Fish cutlet', nameAm: 'አሳ ኮተሌት', price: 500, category: 'Fish', tags: ['Fasting', 'Popular'] },
 
-  // Juice & Shakes
-  { id: 'ju1', nameEn: 'Mango juice', nameAm: 'ማንጎ ጁስ', price: 200, category: 'Juice & Shakes' },
-  { id: 'ju2', nameEn: 'Avocado juice', nameAm: 'አቮካዶ ጁስ', price: 200, category: 'Juice & Shakes' },
-  { id: 'ju3', nameEn: 'Papaya juice', nameAm: 'ፓፓያ ጁስ', price: 200, category: 'Juice & Shakes' },
-  { id: 'ju4', nameEn: 'Spris juice', nameAm: 'ስፕሪሰ ጁስ', price: 200, category: 'Juice & Shakes' },
-  { id: 'ju5', nameEn: 'Watermelon juice', nameAm: 'ሃብሃብ ጁስ', price: 200, category: 'Juice & Shakes' },
-  { id: 'ju6', nameEn: 'Special juice', nameAm: 'ስፔሻል ጁስ', price: 300, category: 'Juice & Shakes', tags: ['Popular'] },
-  { id: 'sh1', nameEn: 'Avocado Milkshake', nameAm: 'አቨካዶ ሼክ', price: 300, category: 'Juice & Shakes' },
-  { id: 'sh2', nameEn: 'Mango Milkshake', nameAm: 'ማንጎ ሼክ', price: 300, category: 'Juice & Shakes' },
-  { id: 'sh3', nameEn: 'Banana Milkshake', nameAm: 'ሙዝ ሼክ', price: 300, category: 'Juice & Shakes' },
-  { id: 'sh4', nameEn: 'Papaya Milkshake', nameAm: 'ፓፓያ ሼክ', price: 300, category: 'Juice & Shakes' },
-
-  // Hot Drinks
-  { id: 'hd1', nameEn: 'Tea', nameAm: 'ሻይ', price: 40, category: 'Hot Drinks' },
-  { id: 'hd2', nameEn: 'Coffee', nameAm: 'ቡና', price: 60, category: 'Hot Drinks' },
-  { id: 'hd3', nameEn: 'Spris', nameAm: 'ስፕሪስ', price: 60, category: 'Hot Drinks' },
-  { id: 'hd4', nameEn: 'Macchiato', nameAm: 'ማኪያቶ', price: 60, category: 'Hot Drinks' },
-  { id: 'hd5', nameEn: 'Special tea', nameAm: 'ስፔሻል ሻይ', price: 70, category: 'Hot Drinks' },
-  { id: 'hd6', nameEn: 'Orange tea', nameAm: 'ብርቱካን ሻይ', price: 60, category: 'Hot Drinks' },
-  { id: 'hd7', nameEn: 'Milk', nameAm: 'ወተት', price: 70, category: 'Hot Drinks' },
-  { id: 'hd8', nameEn: 'Peanut tea', nameAm: 'የውዝ ሻይ', price: 60, category: 'Hot Drinks' },
-  { id: 'hd9', nameEn: 'Milk with coffee', nameAm: 'ወተት በቡና', price: 70, category: 'Hot Drinks' },
-  { id: 'hd10', nameEn: 'Mango tea', nameAm: 'ማንጎ ሻይ', price: 60, category: 'Hot Drinks' },
-  { id: 'hd11', nameEn: 'Hot chocolate', nameAm: 'ሆት ቸኮሌት', price: 80, category: 'Hot Drinks' },
-  { id: 'hd12', nameEn: 'Keshir', nameAm: 'ቀሽር', price: 50, category: 'Hot Drinks' },
-  { id: 'hd13', nameEn: 'Ice tea', nameAm: 'አይስ ቲ', price: 60, category: 'Hot Drinks' },
-  { id: 'hd14', nameEn: 'Ice coffee', nameAm: 'አይስ ኮፊ', price: 70, category: 'Hot Drinks' },
-  { id: 'hd15', nameEn: 'Ice milk', nameAm: 'አይስ ሚልክ', price: 80, category: 'Hot Drinks' },
-
-  // Drinks
+  // Drinks & Spirits
   { id: 'dr1', nameEn: '0.5 liter water', nameAm: '0.5 ሊትር ውሃ', price: 30, category: 'Drinks' },
-  { id: 'dr2', nameEn: '1 liter water', nameAm: '1 ሊትር ውሃ', price: 50, category: 'Drinks' },
-  { id: 'dr3', nameEn: '2 liter water', nameAm: '2 ሊትር ውሃ', price: 60, category: 'Drinks' },
-  { id: 'dr4', nameEn: 'Soft drinks', nameAm: 'ለስላሳ መጠጦች', price: 50, category: 'Drinks' },
-  { id: 'dr5', nameEn: 'Ambo water', nameAm: 'አምቦ ውሃ', price: 50, category: 'Drinks' },
-  { id: 'dr6', nameEn: 'Nigus', nameAm: 'ንጉስ ማልት', price: 90, category: 'Drinks', tags: ['Malt'] },
-  { id: 'dr7', nameEn: 'Sinq', nameAm: 'ስንቅ ማልት', price: 90, category: 'Drinks', tags: ['Malt'] },
-  { id: 'dr8', nameEn: 'Sofi', nameAm: 'ሶፊ ማልት', price: 90, category: 'Drinks', tags: ['Malt'] },
-  { id: 'dr9', nameEn: 'Beer', nameAm: 'ቢራ', price: 100, category: 'Drinks' },
-  { id: 'dr10', nameEn: 'Heiniken', nameAm: 'ሃይኒከን', price: 120, category: 'Drinks',tags: ['Beer'] },
-  { id: 'dr11', nameEn: 'Bedele special', nameAm: 'በደሌ ስፔሻል', price: 120, category: 'Drinks',tags: ['Beer'] },
-  { id: 'dr12', nameEn: 'Guder small', nameAm: 'ጉደር (ትንሽ)', price: 300, category: 'Drinks' },
-  { id: 'dr13', nameEn: 'Guder big', nameAm: 'ጉደር (ትልቅ)', price: 600, category: 'Drinks' },
-  { id: 'dr14', nameEn: 'Awash', nameAm: 'አዋሽ', price: 600, category: 'Drinks' },
-  { id: 'dr15', nameEn: 'Axumite', nameAm: 'አክሱማይት', price: 1000, category: 'Drinks' },
-  { id: 'dr16', nameEn: 'Awash Tekeshno', nameAm: 'አዋሽ ተከሽኖ', price: 800, category: 'Drinks' },
-  { id: 'dr17', nameEn: 'Kemila', nameAm: 'ከሚላ', price: 1000, category: 'Drinks' },
-  { id: 'dr18', nameEn: 'Acacia', nameAm: 'አካሲያ', price: 1700, category: 'Drinks' },
-  { id: 'dr19', nameEn: 'Rift valley', nameAm: 'ሪፍት ቫሊ', price: 1700, category: 'Drinks' },
-
-  // Alcohol Drinks(Bottle)
-  { id: 'ab1', nameEn: 'Champagne', nameAm: 'ሻምፓኝ', price: 10000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab2', nameEn: 'Tequila', nameAm: 'ተኪላ', price: 12000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab3', nameEn: 'Stolichnaya vodka (0.3 L)', nameAm: 'ስቶልችኒያ ቮድካ (0.3 ሊ)', price: 4000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab4', nameEn: 'Stolichnaya vodka (0.5 L)', nameAm: 'ስቶልችኒያ ቮድካ (0.5 ሊ)', price: 6000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab5', nameEn: 'Stolichnaya vodka (0.75 L)', nameAm: 'ስቶልችኒያ ቮድካ (0.75 ሊ)', price: 7000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab6', nameEn: 'Stolichnaya vodka (1 L)', nameAm: 'ስቶልችኒያ ቮድካ (1 ሊ)', price: 9000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab7', nameEn: 'Absolute vodka', nameAm: 'አብሰሉት ቮድካ', price: 10000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab8', nameEn: 'Malibu', nameAm: 'ማሊቡ', price: 10000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab9', nameEn: 'Winterpalace', nameAm: 'ዊንተር ፓላስ', price: 9000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab10', nameEn: 'Black label', nameAm: 'ብላክ ሌብል ጠርሙስ', price: 15000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab11', nameEn: 'Double black label', nameAm: 'ደብል ብላክ ሌብል', price: 20000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab12', nameEn: 'Gold label', nameAm: 'ጎልድ ሌብል', price: 20000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab13', nameEn: 'Chivas', nameAm: 'ቺቫስ', price: 15000, category: 'Alcohol Drinks(Bottle)', tags: ['12 Years-old'] },
-  { id: 'ab14', nameEn: 'Amarula', nameAm: 'አማሩላ', price: 10000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab15', nameEn: 'Glenfiddich', nameAm: 'ግሌንፊዲክ', price: 20000, category: 'Alcohol Drinks(Bottle)',tags: ['15 Years-old'] },
-  { id: 'ab16', nameEn: 'Glenfiddich', nameAm: 'ግሌንፊዲክ', price: 25000, category: 'Alcohol Drinks(Bottle)',tags: ['18 Years-old'] },
-  { id: 'ab17', nameEn: 'Hennessy', nameAm: 'ሄነሲ', price: 20000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab18', nameEn: 'Jack Daniel', nameAm: 'ጃክ ዳንኤል', price: 15000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab19', nameEn: 'XO Cognac', nameAm: 'ኤክስኦ ኮኛክ', price: 50000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab20', nameEn: 'Gordon dry gin', nameAm: 'ጎርደን ድራይ ጂን', price: 10000, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab21', nameEn: 'Tequila (cc)', nameAm: 'ተኪላ በሲሲ', price: 350, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab22', nameEn: 'Double black (cc)', nameAm: 'ደብል ብላክ በሲሲ', price: 400, category: 'Alcohol Drinks(Bottle)' },
-  { id: 'ab23', nameEn: 'Gordon dry gin (cc)', nameAm: 'ጎርደን ድራይ ጂን በሲሲ', price: 250, category: 'Alcohol Drinks(Bottle)' },
+  { id: 'dr6', nameEn: 'Nigus Malt', nameAm: 'ንጉስ ማልት', price: 90, category: 'Drinks', tags: ['Malt'] },
+  { id: 'dr10', nameEn: 'Heineken', nameAm: 'ሃይኒከን', price: 120, category: 'Drinks', tags: ['Beer'] },
+  { id: 'ab1', nameEn: 'Champagne', nameAm: 'ሻምፓኝ', price: 10000, category: 'Alcohol Drinks' },
+  { id: 'ab10', nameEn: 'Black label Bottle', nameAm: 'ብላክ ሌብል ጠርሙስ', price: 15000, category: 'Alcohol Drinks' },
+  { id: 'ab19', nameEn: 'XO Cognac', nameAm: 'ኤክስኦ ኮኛክ', price: 50000, category: 'Alcohol Drinks', tags: ['Popular'] },
+  { id: 'ab21', nameEn: 'Tequila (Shot)', nameAm: 'ተኪላ በሲሲ', price: 350, category: 'Alcohol Drinks' },
 
   // Continental Breakfast
   { id: 'cb1', nameEn: 'Scrambled Egg', nameAm: 'እንቁላል ፍርፍር', price: 250, category: 'Continental Breakfast', tags: ['For room customer only'] },
-  { id: 'cb2', nameEn: 'Omelet', nameAm: 'ኦምሌት', price: 250, category: 'Continental Breakfast', tags: ['For room customer only'] },
-  { id: 'cb3', nameEn: 'French toast', nameAm: 'ፍሬንች ቶስት', price: 250, category: 'Continental Breakfast', tags: ['For room customer only'] },
-  { id: 'cb4', nameEn: 'Enjera firfir', nameAm: 'እንጀራ ፍርፍር', price: 250, category: 'Continental Breakfast', tags: ['For room customer only'] },
-  { id: 'cb5', nameEn: 'Egg sandwich', nameAm: 'እንቁላል ሳንዱች', price: 250, category: 'Continental Breakfast', tags: ['For room customer only'] },
-  { id: 'cb6', nameEn: 'Vegetable sandwich', nameAm: 'አትክልት ሳንዱች', price: 200, category: 'Continental Breakfast', tags: ['Fasting', 'For room customer only'] },
   { id: 'cb7', nameEn: 'Pancake', nameAm: 'ፓን ኬክ', price: 250, category: 'Continental Breakfast', tags: ['For room customer only'] },
-  { id: 'cb8', nameEn: 'Oats', nameAm: 'አጃ', price: 250, category: 'Continental Breakfast', tags: ['Fasting', 'For room customer only'] },
-  { id: 'cb9', nameEn: 'Fetira with honey', nameAm: 'ፈጢራ በማር', price: 250, category: 'Continental Breakfast', tags: ['Fasting','For room customer only'] },
-  { id: 'cb10', nameEn: 'Fetira with egg & honey', nameAm: 'ፈጢራ በእንቁላል በማር', price: 300, category: 'Continental Breakfast', tags: ['For room customer only'] },
-  { id: 'cb11', nameEn: 'Papaya juice', nameAm: 'ፓፓያ ጁስ', price: 200, category: 'Continental Breakfast', tags: ['For room customer only'] },
-  { id: 'cb12', nameEn: 'Watermelon juice', nameAm: 'ሃብሃብ ጁስ', price: 200, category: 'Continental Breakfast', tags: ['For room customer only'] },
-  { id: 'cb13', nameEn: 'Tea', nameAm: 'ሻይ', price: 40, category: 'Continental Breakfast', tags: ['For room customer only'] },
-  { id: 'cb14', nameEn: 'Milk', nameAm: 'ወተት', price: 70, category: 'Continental Breakfast', tags: ['For room customer only'] },
-  { id: 'cb15', nameEn: 'Coffee', nameAm: 'ቡና', price: 60, category: 'Continental Breakfast', tags: ['For room customer only'] },
 
   // Extra Section
   { id: 'ot1', nameEn: 'Extra injera', nameAm: 'ተጨማሪ እንጀራ', price: 40, category: 'Extra' },
-  { id: 'ot2', nameEn: 'Extra bread', nameAm: 'ተጨማሪ ዳቦ', price: 10, category: 'Extra' },
-  { id: 'ot3', nameEn: 'Extra cheese', nameAm: 'ተጨማሪ ቺዝ', price: 50, category: 'Extra' },
-  { id: 'ot4', nameEn: 'Extra ketchup', nameAm: 'ተጨማሪ ካቻፕ', price: 30, category: 'Extra' },
-  { id: 'ot5', nameEn: 'Aluminium foil', nameAm: 'አልሙኒየም ፎይል', price: 50, category: 'Extra',tags: ['Takeaway box'] },
-  { id: 'ot6', nameEn: 'Burger box', nameAm: 'ቴክ አዌይ ቦክስ / የበርገር ሳጥን', price: 50, category: 'Extra',tags: ['Takeaway box'] },
-  { id: 'ot7', nameEn: 'Pizza box', nameAm: 'የፒዛ ሳጥን', price: 50, category: 'Extra',tags: ['Takeaway box'] }
+  { id: 'ot5', nameEn: 'Aluminium foil', nameAm: 'አልሙኒየም ፎይል', price: 50, category: 'Extra', tags: ['Takeaway box'] }
 ];
 
 // --- COMPONENTS ---
@@ -251,13 +172,13 @@ const Header = () => (
   <header className="pt-8 pb-10 px-6 bg-[#0c0c0c] flex flex-col items-center">
     <div className="relative mb-6">
       <div className="flex items-center justify-center">
-        <div className="relative w-16 h-16 flex items-center justify-center">
-          <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[#d4af37] text-xl">👑</span>
+        <div className="relative w-20 h-20 flex items-center justify-center">
+          <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[#d4af37] text-2xl drop-shadow-lg">👑</span>
           <div className="flex items-baseline font-black text-[#d4af37] italic select-none">
-            <span className="text-5xl leading-none">K</span>
-            <span className="text-2xl leading-none -ml-0.5">E</span>
+            <span className="text-6xl leading-none">K</span>
+            <span className="text-3xl leading-none -ml-0.5">E</span>
           </div>
-          <div className="absolute inset-0 border-2 border-[#d4af37]/30 rounded-full scale-125"></div>
+          <div className="absolute inset-0 border-2 border-[#d4af37]/40 rounded-full scale-125 animate-pulse"></div>
         </div>
       </div>
     </div>
@@ -270,7 +191,7 @@ const Header = () => (
       </h2>
       <div className="mt-4 flex items-center justify-center gap-3">
         <span className="h-[1px] w-8 bg-[#ff3d2e]/40"></span>
-        <span className="text-[10px] text-gray-500 uppercase tracking-[0.3em] font-bold">ALAMATA</span>
+        <span className="text-[10px] text-gray-500 uppercase tracking-[0.4em] font-black">ALAMATA</span>
         <span className="h-[1px] w-8 bg-[#ff3d2e]/40"></span>
       </div>
     </div>
@@ -282,53 +203,64 @@ const SearchBar = ({ value, onChange }: { value: string, onChange: (v: string) =
     <div className="relative group">
       <input
         type="text"
-        placeholder="Search dishes... / ምግቦችን ይፈልጉ..."
+        placeholder="Search for your favorite dish..."
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-sm text-white focus:outline-none focus:border-[#ff3d2e]/50 transition-all placeholder:text-gray-600 shadow-xl"
+        className="w-full bg-white/5 border border-white/10 rounded-3xl py-4 pl-12 pr-12 text-sm text-white focus:outline-none focus:border-[#ff3d2e]/50 transition-all placeholder:text-gray-600 shadow-2xl"
       />
       <svg className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-[#ff3d2e] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
       </svg>
+      {value && (
+        <button 
+          onClick={() => onChange('')}
+          className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full bg-white/10 text-white active:scale-90"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      )}
     </div>
   </div>
 );
 
 const CategoryNav = ({ activeCategory, onSelect }: { activeCategory: Category, onSelect: (c: Category) => void }) => (
-  <nav className="sticky top-0 z-50 sticky-nav py-5 px-4 border-b border-white/5 overflow-x-auto hide-scrollbar flex gap-3 shadow-2xl">
+  <nav className="sticky top-0 z-50 sticky-nav py-6 px-4 border-b border-white/5 overflow-x-auto hide-scrollbar flex gap-3 shadow-2xl">
     {CATEGORIES.map((cat) => (
       <button
         key={cat}
         onClick={() => onSelect(cat)}
-        className={`px-5 py-2.5 rounded-2xl whitespace-nowrap text-xs font-black transition-all duration-300 transform flex items-center gap-2 ${
+        className={`px-6 py-3 rounded-2xl whitespace-nowrap text-[11px] font-black transition-all duration-300 transform flex items-center gap-2.5 ${
           activeCategory === cat 
-            ? 'bg-[#ff3d2e] text-white shadow-lg shadow-[#ff3d2e]/20 -translate-y-0.5' 
-            : 'bg-white/5 text-gray-500 hover:text-gray-300'
+            ? 'bg-[#ff3d2e] text-white shadow-xl shadow-[#ff3d2e]/30 -translate-y-0.5 scale-105' 
+            : 'bg-white/5 text-gray-500 hover:text-gray-300 active:scale-95'
         }`}
       >
-        <span className="text-sm">{CATEGORY_EMOJIS[cat]}</span>
-        {cat}
+        <span className="text-base">{CATEGORY_EMOJIS[cat]}</span>
+        {cat.toUpperCase()}
       </button>
     ))}
   </nav>
 );
 
-const TagBadge = ({ tag }: { tag: string; key?: React.Key }) => {
+const TagBadge = ({ tag }: { tag: string }) => {
   const getColors = () => {
     switch(tag) {
       case 'Spicy': return 'bg-red-500/10 text-red-500 border-red-500/20';
       case 'Vegetarian':
       case 'Fasting': return 'bg-green-500/10 text-green-500 border-green-500/20';
       case 'Meat': return 'bg-orange-500/10 text-orange-400 border-orange-500/20';
-      case 'Fish': return 'bg-blue-500/10 text-blue-500 border-blue-500/20';
-      case 'Malt': return 'bg-purple-500/10 text-purple-400 border-purple-500/20';
-      case 'Beer': return 'bg-amber-500/10 text-amber-500 border-amber-500/20';
-      case 'Takeaway box': return 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20';
       case 'Popular': return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
       default: return 'bg-gray-500/10 text-gray-400 border-gray-500/20';
     }
   };
-  return <span className={`text-[9px] uppercase font-black px-2.5 py-1 rounded-lg border ${getColors()} tracking-wider`}>{tag}</span>;
+  return (
+    <span className={`text-[9px] uppercase font-black px-2.5 py-1 rounded-lg border ${getColors()} tracking-wider flex items-center gap-1`}>
+      {tag === 'Popular' && <span>⭐</span>}
+      {tag}
+    </span>
+  );
 };
 
 const SelectionTray = ({ selectedItems, onClose }: { selectedItems: MenuItem[], onClose: () => void }) => {
@@ -339,77 +271,64 @@ const SelectionTray = ({ selectedItems, onClose }: { selectedItems: MenuItem[], 
 
   return (
     <>
-      {/* Detail Overlay */}
       {isExpanded && (
         <div 
-          className="fixed inset-0 bg-black/80 backdrop-blur-md z-[110] animate-fadeIn"
+          className="fixed inset-0 bg-black/90 backdrop-blur-xl z-[110] animate-fadeIn"
           onClick={() => setIsExpanded(false)}
         >
           <div 
-            className="absolute bottom-0 left-0 right-0 max-w-lg mx-auto bg-[#1a1a1a] rounded-t-[3rem] p-8 border-t border-white/10 shadow-2xl animate-slideUp"
+            className="absolute bottom-0 left-0 right-0 max-w-lg mx-auto bg-[#111111] rounded-t-[3.5rem] p-10 border-t border-white/10 shadow-2xl animate-slideUp"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-12 h-1.5 bg-white/10 rounded-full mx-auto mb-8"></div>
-            <div className="flex justify-between items-center mb-8">
-              <h2 className="text-2xl font-[900] text-white uppercase tracking-tight">Your Order / የእርስዎ ትዕዛዝ</h2>
-              <button 
-                onClick={() => setIsExpanded(false)}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 text-white active:scale-90"
-              >
-                ✕
+            <div className="w-16 h-1.5 bg-white/20 rounded-full mx-auto mb-10"></div>
+            <div className="flex justify-between items-center mb-10">
+              <h2 className="text-3xl font-[900] text-white uppercase tracking-tighter">Your Order</h2>
+              <button onClick={() => setIsExpanded(false)} className="p-3 rounded-full bg-white/5 text-white active:scale-75">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
 
-            <div className="max-h-[60vh] overflow-y-auto pr-2 space-y-4 mb-8 hide-scrollbar">
+            <div className="max-h-[50vh] overflow-y-auto pr-4 space-y-6 mb-10 hide-scrollbar">
               {selectedItems.map((item, idx) => (
-                <div key={`${item.id}-${idx}`} className="flex justify-between items-center py-4 border-b border-white/5 last:border-0">
+                <div key={`${item.id}-${idx}`} className="flex justify-between items-center py-5 border-b border-white/5 last:border-0 group">
                   <div>
-                    <p className="text-white font-bold text-lg">{item.nameEn}</p>
-                    <p className="font-eth text-[#ff3d2e] font-semibold">{item.nameAm}</p>
+                    <p className="text-white font-black text-xl leading-tight group-hover:text-[#ff3d2e] transition-colors">{item.nameEn}</p>
+                    <p className="font-eth text-[#ff3d2e] font-bold text-lg">{item.nameAm}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-white font-black text-xl">{item.price}</p>
-                    <p className="text-[10px] text-gray-500 font-bold uppercase">ETB</p>
+                    <p className="text-white font-black text-2xl tracking-tighter">{formatPrice(item.price)}</p>
+                    <p className="text-[10px] text-gray-600 font-black uppercase">ETB</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="bg-[#ff3d2e] rounded-3xl p-6 flex justify-between items-center shadow-lg shadow-[#ff3d2e]/20">
+            <div className="bg-gradient-to-r from-[#ff3d2e] to-[#ff5d4e] rounded-[2.5rem] p-8 flex justify-between items-center shadow-2xl shadow-[#ff3d2e]/20">
               <div>
-                <p className="text-white/70 text-[10px] font-black uppercase tracking-widest">Total Amount</p>
-                <p className="text-3xl font-black text-white">{total} <span className="text-sm">ETB</span></p>
+                <p className="text-white/60 text-[11px] font-black uppercase tracking-[0.2em] mb-1">Total Due</p>
+                <p className="text-4xl font-black text-white tracking-tighter">{formatPrice(total)} <span className="text-base font-bold">ETB</span></p>
               </div>
-              <button 
-                onClick={() => {
-                  onClose();
-                  setIsExpanded(false);
-                }}
-                className="bg-black text-white px-8 py-4 rounded-2xl text-xs font-black active:scale-95 shadow-xl"
-              >
-                RESET ALL
+              <button onClick={() => { onClose(); setIsExpanded(false); }} className="bg-white text-[#ff3d2e] px-10 py-5 rounded-3xl text-xs font-black active:scale-95 shadow-xl hover:bg-gray-100 transition-all uppercase tracking-widest">
+                Reset
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Floating Tray */}
-      <div className="fixed bottom-0 left-0 right-0 z-[100] p-4 pointer-events-none">
+      <div className="fixed bottom-0 left-0 right-0 z-[100] p-6 pointer-events-none">
         <div 
           onClick={() => setIsExpanded(true)}
-          className="max-w-lg mx-auto bg-[#ff3d2e] rounded-[2rem] p-5 shadow-[0_20px_50px_rgba(255,61,46,0.3)] flex items-center justify-between pointer-events-auto cursor-pointer active:scale-95 transition-all"
+          className="max-w-md mx-auto bg-[#ff3d2e] rounded-[2.5rem] p-6 shadow-[0_25px_60px_rgba(255,61,46,0.4)] flex items-center justify-between pointer-events-auto cursor-pointer active:scale-95 transition-all group"
         >
           <div className="flex flex-col">
-            <span className="text-[10px] font-black text-white/70 uppercase tracking-[0.2em]">Summary / ድምር (Tap to view)</span>
-            <span className="text-2xl font-[900] text-white">{total} <span className="text-sm font-bold opacity-80">ETB</span></span>
+            <span className="text-[10px] font-black text-white/60 uppercase tracking-widest group-hover:text-white transition-colors">TAP TO VIEW ORDER</span>
+            <span className="text-3xl font-[900] text-white tracking-tighter">{formatPrice(total)} <span className="text-sm font-bold opacity-80">ETB</span></span>
           </div>
-          <div className="flex items-center gap-4">
-             <span className="bg-white text-[#ff3d2e] text-[10px] font-black px-3 py-1 rounded-full shadow-sm">{selectedItems.length} ITEMS</span>
-             <div className="bg-black/20 p-2 rounded-full">
-               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 15l7-7 7 7" />
-               </svg>
+          <div className="flex items-center gap-5">
+             <span className="bg-black/20 text-white text-xs font-black px-4 py-2 rounded-full backdrop-blur-md border border-white/10">{selectedItems.length} {selectedItems.length === 1 ? 'ITEM' : 'ITEMS'}</span>
+             <div className="bg-white/20 p-2.5 rounded-full group-hover:rotate-12 transition-transform">
+               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 15l7-7 7 7" /></svg>
              </div>
           </div>
         </div>
@@ -433,11 +352,11 @@ const App = () => {
   };
 
   const filteredItems = useMemo(() => {
-    const query = searchQuery.toLowerCase();
+    const query = searchQuery.toLowerCase().trim();
     return MENU_ITEMS.filter(item => {
       const matchesSearch = item.nameEn.toLowerCase().includes(query) || 
                           item.nameAm.toLowerCase().includes(query);
-      return searchQuery ? matchesSearch : (item.category === activeCategory);
+      return query ? matchesSearch : (item.category === activeCategory);
     });
   }, [activeCategory, searchQuery]);
 
@@ -447,91 +366,109 @@ const App = () => {
   );
 
   return (
-    <div className="min-h-screen pb-40">
-      <Header />
-      <SearchBar value={searchQuery} onChange={setSearchQuery} />
-      {!searchQuery && <CategoryNav activeCategory={activeCategory} onSelect={setActiveCategory} />}
+    <div className="min-h-screen pb-48 flex flex-col items-center">
+      <div className="w-full max-w-lg">
+        <Header />
+        <SearchBar value={searchQuery} onChange={setSearchQuery} />
+        {!searchQuery && <CategoryNav activeCategory={activeCategory} onSelect={setActiveCategory} />}
 
-      <main className="px-5 mt-10 max-w-lg mx-auto space-y-5">
-        <div className="flex items-center justify-between mb-6 px-1">
-          <h2 className="text-2xl font-[900] text-white uppercase tracking-tight flex items-center gap-3">
-            {!searchQuery && <span className="opacity-80">{CATEGORY_EMOJIS[activeCategory]}</span>}
-            {searchQuery ? 'Results' : activeCategory}
-          </h2>
-          <span className="text-gray-700 text-[10px] font-black bg-white/5 px-2 py-1 rounded-md">{filteredItems.length} ITEMS</span>
-        </div>
-
-        {filteredItems.length > 0 ? (
-          filteredItems.map(item => (
-            <div 
-              key={item.id}
-              onClick={() => toggleItem(item.id)}
-              className={`menu-card rounded-[1.5rem] p-6 border transition-all duration-300 active:scale-[0.98] cursor-pointer animate-item ${
-                selectedIds.has(item.id) ? 'border-[#ff3d2e]/40 bg-[#ff3d2e]/5' : 'border-white/5'
-              }`}
-            >
-              <div className="flex justify-between items-start gap-4 mb-3">
-                <div className="flex-1">
-                  <h3 className="text-lg font-bold text-white leading-tight mb-0.5">{item.nameEn}</h3>
-                  <h4 className="font-eth text-lg text-[#ff3d2e] font-bold">{item.nameAm}</h4>
-                </div>
-                <div className="text-right flex flex-col items-end">
-                  <span className="text-2xl font-[900] text-white whitespace-nowrap leading-none">{item.price}</span>
-                  <span className="text-[10px] font-bold text-gray-500 uppercase mt-1">ETB</span>
-                </div>
-              </div>
-              <div className="flex flex-wrap items-center gap-2 mt-4">
-                {item.tags?.map(tag => <TagBadge key={tag} tag={tag} />)}
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="py-24 text-center text-gray-700">
-            <p className="font-bold uppercase tracking-widest text-xs">Dish not found</p>
+        <main className="px-6 mt-12 space-y-6">
+          <div className="flex items-center justify-between mb-8 px-1">
+            <h2 className="text-3xl font-[900] text-white uppercase tracking-tighter flex items-center gap-4">
+              {!searchQuery && <span className="text-3xl opacity-90">{CATEGORY_EMOJIS[activeCategory]}</span>}
+              {searchQuery ? 'Search Results' : activeCategory}
+            </h2>
+            <span className="text-gray-700 text-[10px] font-black bg-white/5 border border-white/5 px-3 py-1.5 rounded-xl uppercase tracking-widest">{filteredItems.length} Products</span>
           </div>
-        )}
-      </main>
+
+          {filteredItems.length > 0 ? (
+            filteredItems.map(item => (
+              <div 
+                key={item.id}
+                onClick={() => toggleItem(item.id)}
+                className={`menu-card rounded-[2.2rem] p-7 border transition-all duration-300 active:scale-[0.97] cursor-pointer animate-item flex flex-col gap-5 ${
+                  selectedIds.has(item.id) 
+                    ? 'border-[#ff3d2e]/60 bg-[#ff3d2e]/10 shadow-[0_15px_40px_rgba(255,61,46,0.15)]' 
+                    : item.tags?.includes('Popular')
+                    ? 'border-yellow-500/30 shadow-[0_10px_30px_rgba(234,179,8,0.05)]'
+                    : 'border-white/5'
+                }`}
+              >
+                <div className="flex justify-between items-start gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-black text-white leading-tight mb-1">{item.nameEn}</h3>
+                    <h4 className="font-eth text-xl text-[#ff3d2e] font-black tracking-tight">{item.nameAm}</h4>
+                  </div>
+                  <div className="text-right flex flex-col items-end">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-2xl font-[1000] text-white tracking-tighter">{formatPrice(item.price)}</span>
+                    </div>
+                    <span className="text-[10px] font-black text-gray-600 uppercase mt-1 tracking-widest">ETB</span>
+                  </div>
+                </div>
+                {item.tags && item.tags.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    {item.tags.map(tag => <TagBadge key={tag} tag={tag} />)}
+                  </div>
+                )}
+              </div>
+            ))
+          ) : (
+            <div className="py-32 text-center">
+              <div className="text-5xl mb-6 grayscale opacity-40">🍽️</div>
+              <p className="font-black text-gray-700 uppercase tracking-widest text-sm mb-4">No matching dishes found</p>
+              <button 
+                onClick={() => setSearchQuery('')}
+                className="text-[#ff3d2e] font-black text-xs border border-[#ff3d2e]/30 px-6 py-3 rounded-2xl hover:bg-[#ff3d2e]/10 transition-colors"
+              >
+                BROWSE ALL CATEGORIES
+              </button>
+            </div>
+          )}
+        </main>
+
+        <footer className="mt-32 pt-20 pb-40 border-t border-white/5 text-center bg-[#070707] rounded-t-[4rem]">
+          <div className="mb-16 px-10">
+            <p className="text-[#ff3d2e] text-[10px] font-black uppercase tracking-[0.3em] mb-4">Guest Experience & Feedback</p>
+            <a href="tel:+251938222226" className="inline-block text-white text-3xl font-[1000] tracking-tighter hover:text-[#ff3d2e] transition-colors active:scale-95">
+              +251 938 222 226
+            </a>
+          </div>
+
+          <div className="max-w-xs mx-auto mb-14 p-10 rounded-[3rem] bg-gradient-to-br from-white/5 to-transparent border border-white/10 backdrop-blur-md shadow-2xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-20 h-20 bg-[#5c7cfa]/10 rounded-full blur-3xl -mr-10 -mt-10 group-hover:scale-150 transition-transform"></div>
+            <p className="text-[#5c7cfa] text-[10px] font-[1000] tracking-[0.25em] mb-4 relative z-10">TECHNOLOGY PARTNER</p>
+            <p className="text-white text-lg font-[1000] mb-10 tracking-tighter relative z-10">WEZK TECHNOLOGIES</p>
+            
+            <div className="flex flex-col gap-4 relative z-10">
+              <a 
+                href="https://t.me/yonnyw7" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 bg-white/5 border border-white/10 px-6 py-4 rounded-2xl text-xs font-black text-white hover:bg-[#5c7cfa] transition-all active:scale-95"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.78-1.65 6.31-2.73 7.57-3.24 3.61-1.48 4.36-1.74 4.85-1.75.11 0 .35.03.5.16.13.12.17.28.18.39-.01.07-.01.14-.01.22z"/>
+                </svg>
+                TELEGRAM CHANNEL
+              </a>
+              <a 
+                href="tel:+251938007979" 
+                className="flex items-center justify-center gap-3 bg-white/5 border border-white/10 px-6 py-4 rounded-2xl text-xs font-black text-white hover:bg-white/10 transition-all active:scale-95"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 5a2 2 0 012-2h2.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                </svg>
+                DIRECT SUPPORT
+              </a>
+            </div>
+          </div>
+
+          <p className="text-gray-700 text-[10px] uppercase font-black tracking-[0.5em]">&copy; {new Date().getFullYear()} MALDYOR HOTEL</p>
+        </footer>
+      </div>
 
       <SelectionTray selectedItems={selectedObjects} onClose={() => setSelectedIds(new Set())} />
-
-      <footer className="mt-24 pt-16 pb-32 border-t border-white/5 text-center bg-[#070707]">
-        <div className="mb-12 px-6">
-          <p className="text-[#ff3d2e] text-xs font-black uppercase tracking-widest mb-2">For any comments & feedback</p>
-          <a href="tel:+251938222226" className="text-white text-lg font-black tracking-tighter hover:text-[#ff3d2e] transition-colors">+251 938 222 226</a>
-        </div>
-
-        {/* Developer Partner Card */}
-        <div className="max-w-xs mx-auto mb-10 p-8 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-sm shadow-xl">
-          <p className="text-[#5c7cfa] text-[10px] font-black tracking-[0.2em] mb-2">DEVELOPER PARTNER</p>
-          <p className="text-gray-400 text-[11px] font-black mb-1 uppercase tracking-wider">POWERED BY:</p>
-          <p className="text-white text-sm font-[900] mb-8 tracking-tight">WEZK TECHNOLOGIES</p>
-          
-          <div className="flex flex-wrap gap-3 justify-center">
-            <a 
-              href="https://t.me/yonnyw7" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-[10px] font-black text-white hover:bg-white/10 active:scale-95 transition-all shadow-md"
-            >
-              <svg className="w-4 h-4 text-[#5c7cfa]" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.78-1.65 6.31-2.73 7.57-3.24 3.61-1.48 4.36-1.74 4.85-1.75.11 0 .35.03.5.16.13.12.17.28.18.39-.01.07-.01.14-.01.22z"/>
-              </svg>
-              TELEGRAM
-            </a>
-            <a 
-              href="tel:+251938007979" 
-              className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-[10px] font-black text-white hover:bg-white/10 active:scale-95 transition-all shadow-md"
-            >
-              <svg className="w-4 h-4 text-[#5c7cfa]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 5a2 2 0 012-2h2.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-              </svg>
-              DEV CONTACT
-            </a>
-          </div>
-        </div>
-
-        <p className="text-gray-500 text-[10px] uppercase tracking-[0.4em] mb-4 font-black">&copy; {new Date().getFullYear()} MALDYOR HOTEL</p>
-      </footer>
     </div>
   );
 };
