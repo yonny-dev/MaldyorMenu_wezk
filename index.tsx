@@ -288,6 +288,7 @@ const App = () => {
   const [activeCategory, setActiveCategory] = useState<Category>(CATEGORIES[0]);
   const [search, setSearch] = useState('');
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const toggleItem = (id: string) => {
     setSelectedIds(prev => {
@@ -306,11 +307,13 @@ const App = () => {
     });
   }, [activeCategory, search]);
 
+  const selectedObjects = useMemo(() => 
+    MENU_ITEMS.filter(item => selectedIds.has(item.id)),
+    [selectedIds]
+  );
+
   const selectedCount = selectedIds.size;
-  const totalPrice = Array.from(selectedIds).reduce((acc, id) => {
-    const item = MENU_ITEMS.find(i => i.id === id);
-    return acc + (item?.price || 0);
-  }, 0);
+  const totalPrice = selectedObjects.reduce((acc, item) => acc + item.price, 0);
 
   return (
     <div className="min-h-screen flex flex-col items-center pb-32">
@@ -425,18 +428,71 @@ const App = () => {
         </footer>
       </div>
 
-      {selectedCount > 0 && (
+      {/* CART MODAL */}
+      {isCartOpen && (
+        <div className="fixed inset-0 z-[120] animate-fade" onClick={() => setIsCartOpen(false)}>
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-xl"></div>
+          <div className="absolute bottom-0 left-0 right-0 max-w-lg mx-auto bg-[#1a1a1a] rounded-t-[3rem] border-t border-white/10 shadow-2xl p-8 pb-12 animate-item max-h-[85vh] flex flex-col" onClick={e => e.stopPropagation()}>
+            <div className="w-12 h-1.5 bg-white/10 rounded-full mx-auto mb-8"></div>
+            
+            <div className="flex justify-between items-center mb-8">
+              <h3 className="text-2xl font-black text-white uppercase tracking-tight">Your Selection</h3>
+              <button onClick={() => setIsCartOpen(false)} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 text-white active:scale-90">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto pr-2 space-y-6 hide-scrollbar mb-8">
+              {selectedObjects.map(item => (
+                <div key={item.id} className="flex justify-between items-center group">
+                  <div className="flex-1">
+                    <p className="text-white font-bold text-lg leading-tight">{item.nameEn}</p>
+                    <p className="font-eth text-[#ff3d2e] font-semibold text-sm">{item.nameAm}</p>
+                  </div>
+                  <div className="flex items-center gap-6">
+                    <div className="text-right">
+                      <p className="text-white font-black text-lg">{formatPrice(item.price)}</p>
+                      <p className="text-[9px] text-gray-500 font-bold uppercase tracking-widest">ETB</p>
+                    </div>
+                    <button onClick={() => toggleItem(item.id)} className="w-8 h-8 flex items-center justify-center rounded-lg bg-red-500/10 text-red-500 active:scale-90">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-[#ff3d2e] rounded-3xl p-6 flex justify-between items-center shadow-[0_20px_40px_rgba(255,61,46,0.2)]">
+              <div className="flex flex-col">
+                <span className="text-[10px] font-black text-white/60 uppercase tracking-widest mb-1">Total Amount</span>
+                <span className="text-3xl font-[1000] text-white tracking-tighter">{formatPrice(totalPrice)} <span className="text-sm font-bold">ETB</span></span>
+              </div>
+              <button onClick={() => { setSelectedIds(new Set()); setIsCartOpen(false); }} className="bg-black text-white px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest active:scale-95 shadow-xl">
+                Clear All
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* SUMMARY TRAY (Clickable) */}
+      {selectedCount > 0 && !isCartOpen && (
         <div className="fixed bottom-0 left-0 right-0 z-[100] p-6 pointer-events-none animate-fade">
-          <div className="max-w-md mx-auto bg-[#ff3d2e] rounded-[2.5rem] p-6 shadow-[0_30px_70px_rgba(255,61,46,0.4)] flex items-center justify-between pointer-events-auto active:scale-95 transition-all cursor-default">
+          <div 
+            onClick={() => setIsCartOpen(true)}
+            className="max-w-md mx-auto bg-[#ff3d2e] rounded-[2.5rem] p-6 shadow-[0_30px_70px_rgba(255,61,46,0.4)] flex items-center justify-between pointer-events-auto active:scale-95 transition-all cursor-pointer group"
+          >
             <div className="flex flex-col">
               <span className="text-[10px] font-black text-white/60 uppercase tracking-widest mb-1">Estimated Total</span>
               <span className="text-3xl font-[1000] text-white tracking-tighter">{formatPrice(totalPrice)} <span className="text-sm font-bold opacity-80">ETB</span></span>
             </div>
             <div className="flex items-center gap-4">
-               <span className="bg-black/20 text-white text-[10px] font-black px-4 py-2 rounded-full border border-white/10">{selectedCount} ITEMS</span>
-               <button onClick={() => setSelectedIds(new Set())} className="bg-white/20 p-2.5 rounded-full hover:bg-white/30 transition-colors">
-                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" /></svg>
-               </button>
+               <span className="bg-black/20 text-white text-[10px] font-black px-4 py-2 rounded-full border border-white/10 group-hover:bg-black/30 transition-colors">
+                {selectedCount} {selectedCount === 1 ? 'ITEM' : 'ITEMS'}
+               </span>
+               <div className="bg-white/20 p-2.5 rounded-full group-hover:bg-white/30 transition-colors">
+                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 15l7-7 7 7" /></svg>
+               </div>
             </div>
           </div>
         </div>
