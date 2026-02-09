@@ -495,10 +495,41 @@ const App = () => {
       <SelectionTray selectedItems={selectedObjects} onClose={() => setSelectedIds(new Set())} />
 
       <footer className="mt-24 pt-16 pb-32 border-t border-white/5 text-center bg-[#070707]">
-        <div className="mb-6 px-6">
+        <div className="mb-12 px-6">
           <p className="text-[#ff3d2e] text-xs font-black uppercase tracking-widest mb-2">For any comments & feedback</p>
           <a href="tel:+251938222226" className="text-white text-lg font-black tracking-tighter hover:text-[#ff3d2e] transition-colors">+251 938 222 226</a>
         </div>
+
+        {/* Developer Partner Card */}
+        <div className="max-w-xs mx-auto mb-10 p-8 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-sm shadow-xl">
+          <p className="text-[#5c7cfa] text-[10px] font-black tracking-[0.2em] mb-2">DEVELOPER PARTNER</p>
+          <p className="text-gray-400 text-[11px] font-black mb-1 uppercase tracking-wider">POWERED BY:</p>
+          <p className="text-white text-sm font-[900] mb-8 tracking-tight">WEZK TECHNOLOGIES</p>
+          
+          <div className="flex flex-wrap gap-3 justify-center">
+            <a 
+              href="https://t.me/yonnyw7" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-[10px] font-black text-white hover:bg-white/10 active:scale-95 transition-all shadow-md"
+            >
+              <svg className="w-4 h-4 text-[#5c7cfa]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.78-1.65 6.31-2.73 7.57-3.24 3.61-1.48 4.36-1.74 4.85-1.75.11 0 .35.03.5.16.13.12.17.28.18.39-.01.07-.01.14-.01.22z"/>
+              </svg>
+              TELEGRAM
+            </a>
+            <a 
+              href="tel:+251938007979" 
+              className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-[10px] font-black text-white hover:bg-white/10 active:scale-95 transition-all shadow-md"
+            >
+              <svg className="w-4 h-4 text-[#5c7cfa]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 5a2 2 0 012-2h2.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+              DEV CONTACT
+            </a>
+          </div>
+        </div>
+
         <p className="text-gray-500 text-[10px] uppercase tracking-[0.4em] mb-4 font-black">&copy; {new Date().getFullYear()} MALDYOR HOTEL</p>
       </footer>
     </div>
