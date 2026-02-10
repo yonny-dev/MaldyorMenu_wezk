@@ -108,7 +108,7 @@ const MENU_ITEMS: MenuItem[] = [
   { id: 'cy1', nameEn: 'Lamb curry', nameAm: 'ላምብ ኬሪ', price: 550, category: 'Curry', tags: ['Meat'] },
   { id: 'cy2', nameEn: 'Beef curry', nameAm: 'ቢፍ ኬሪ', price: 500, category: 'Curry', tags: ['Meat'] },
   { id: 'cy3', nameEn: 'Chicken curry', nameAm: 'ችክን ኬሪ', price: 550, category: 'Curry', tags: ['Popular'] },
-  { id: 'cy5', nameEn: 'Stir fried fish', nameAm: 'ስቲር ፍራይድ ፊሽ', price: 550, category: 'Curry', tags: ['Fish'] },
+  { id: 'cy5', nameEn: 'Stir fried fish', nameAm: 'ስቲር ፍራይድ ፊッシュ', price: 550, category: 'Curry', tags: ['Fish'] },
   { id: 'cy6', nameEn: 'Stir fried beef', nameAm: 'ስቲር ፍራይድ ቢፍ', price: 550, category: 'Curry', tags: ['Meat'] },
   // Chicken Category
   { id: 'ch1', nameEn: 'Chicken breast', nameAm: 'ችክን ብረስት', price: 550, category: 'Chicken' },
@@ -254,31 +254,31 @@ const Tag = ({ text }: { text: string }) => {
   if (isTakeaway) colors = 'text-pink-400 border-pink-400/20 bg-pink-400/5';
   
   return (
-    <span className={`text-[9px] uppercase font-black px-2 py-0.5 rounded-lg border tracking-wider flex items-center gap-1 ${colors}`}>
+    <span className={`text-[8px] uppercase font-black px-1.5 py-0.5 rounded-lg border tracking-wider flex items-center gap-1 ${colors}`}>
       {isPopular && '⭐'} {text}
     </span>
   );
 };
 
 const Header = () => (
-  <header className="pt-12 pb-10 px-6 bg-[#0c0c0c] flex flex-col items-center">
-    <div className="relative mb-8">
-      <div className="w-16 h-16 flex items-center justify-center relative">
-        <span className="absolute -top-3 text-[#d4af37] text-xl animate-bounce">👑</span>
+  <header className="pt-10 pb-8 px-6 bg-[#0c0c0c] flex flex-col items-center">
+    <div className="relative mb-6">
+      <div className="w-12 h-12 flex items-center justify-center relative">
+        <span className="absolute -top-2 text-[#d4af37] text-base animate-bounce">👑</span>
         <div className="font-black text-[#d4af37] italic flex items-baseline select-none">
-          <span className="text-5xl leading-none">K</span>
-          <span className="text-2xl leading-none -ml-1">E</span>
+          <span className="text-3xl leading-none">K</span>
+          <span className="text-lg leading-none -ml-1">E</span>
         </div>
-        <div className="absolute inset-0 border-2 border-[#d4af37]/30 rounded-full scale-125 animate-pulse"></div>
+        <div className="absolute inset-0 border border-[#d4af37]/30 rounded-full scale-125 animate-pulse"></div>
       </div>
     </div>
     <div className="text-center">
-      <h1 className="text-4xl font-black tracking-tighter text-[#ff3d2e] uppercase leading-none mb-1">MALDYOR HOTEL</h1>
-      <h2 className="font-eth text-3xl font-black text-[#ff3d2e] tracking-tight leading-tight">ማልድዮር ሆቴል</h2>
-      <div className="mt-5 flex items-center justify-center gap-4">
-        <span className="h-px w-10 bg-[#ff3d2e]/30"></span>
-        <span className="text-[10px] text-gray-500 uppercase tracking-[0.4em] font-bold">ALAMATA</span>
-        <span className="h-px w-10 bg-[#ff3d2e]/30"></span>
+      <h1 className="text-2xl font-black tracking-tighter text-[#ff3d2e] uppercase leading-none mb-1">MALDYOR HOTEL</h1>
+      <h2 className="font-eth text-lg font-black text-[#ff3d2e] tracking-tight leading-tight">ማልድዮር ሆቴል</h2>
+      <div className="mt-3 flex items-center justify-center gap-3">
+        <span className="h-px w-8 bg-[#ff3d2e]/30"></span>
+        <span className="text-[8px] text-gray-500 uppercase tracking-[0.4em] font-bold">ALAMATA</span>
+        <span className="h-px w-8 bg-[#ff3d2e]/30"></span>
       </div>
     </div>
   </header>
@@ -316,32 +316,34 @@ const App = () => {
   const totalPrice = selectedObjects.reduce((acc, item) => acc + item.price, 0);
 
   return (
-    <div className="min-h-screen flex flex-col items-center pb-32">
-      <div className="w-full max-w-lg">
+    <div className="min-h-screen bg-[#0c0c0c] flex flex-col items-center pb-32">
+      <div className="w-full max-w-lg mx-auto">
         <Header />
 
-        <div className="px-5 mb-8">
+        {/* SEARCH BAR */}
+        <div className="px-5 mb-6">
           <div className="relative group">
             <input 
               type="text" 
-              placeholder="Search dishes... / ምግቦችን ይፈልጉ..."
+              placeholder="Search dishes..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 pl-14 pr-12 text-sm text-white focus:outline-none focus:border-[#ff3d2e]/50 transition-all placeholder:text-gray-700 shadow-2xl"
+              className="w-full bg-white/5 border border-white/10 rounded-xl py-3.5 pl-11 pr-10 text-xs text-white focus:outline-none focus:border-[#ff3d2e]/50 transition-all placeholder:text-gray-700 shadow-2xl"
             />
-            <svg className="w-6 h-6 absolute left-5 top-1/2 -translate-y-1/2 text-gray-700 group-focus-within:text-[#ff3d2e] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-gray-700 group-focus-within:text-[#ff3d2e] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             {search && (
-              <button onClick={() => setSearch('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors p-2">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" /></svg>
+              <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors p-2">
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             )}
           </div>
         </div>
 
+        {/* CATEGORY NAV */}
         {!search && (
-          <nav className="sticky top-0 z-50 sticky-nav py-5 px-4 border-b border-white/5 overflow-x-auto hide-scrollbar flex gap-3 shadow-2xl">
+          <nav className="sticky top-0 z-50 sticky-nav py-4 px-4 border-b border-white/5 overflow-x-auto hide-scrollbar flex gap-2.5 shadow-2xl">
             {CATEGORIES.map(cat => (
               <button
                 key={cat}
@@ -349,46 +351,47 @@ const App = () => {
                   setActiveCategory(cat);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className={`px-6 py-3 rounded-2xl whitespace-nowrap text-[11px] font-black transition-all duration-300 transform flex items-center gap-2 ${
+                className={`px-4 py-2.5 rounded-xl whitespace-nowrap text-[10px] font-black transition-all duration-300 transform flex items-center gap-1.5 ${
                   activeCategory === cat ? 'bg-[#ff3d2e] text-white shadow-lg shadow-[#ff3d2e]/20 -translate-y-0.5' : 'bg-white/5 text-gray-500 hover:text-gray-300'
                 }`}
               >
-                <span className="text-sm">{CATEGORY_EMOJIS[cat]}</span>
+                <span className="text-xs">{CATEGORY_EMOJIS[cat]}</span>
                 {cat.toUpperCase()}
               </button>
             ))}
           </nav>
         )}
 
-        <main className="px-6 mt-12 space-y-6">
-          <div className="flex items-center justify-between mb-8 px-1">
-            <h2 className="text-2xl font-black text-white uppercase tracking-tight flex items-center gap-3">
-              {!search && <span className="opacity-80">{CATEGORY_EMOJIS[activeCategory]}</span>}
-              {search ? 'Search Results' : activeCategory}
+        {/* MENU LIST */}
+        <main className="px-6 mt-8 space-y-4">
+          <div className="flex items-center justify-between mb-6 px-1">
+            <h2 className="text-lg font-black text-white uppercase tracking-tight flex items-center gap-2">
+              {!search && <span className="opacity-80 text-base">{CATEGORY_EMOJIS[activeCategory]}</span>}
+              {search ? 'Search' : activeCategory}
             </h2>
-            <span className="text-gray-700 text-[10px] font-black bg-white/5 border border-white/5 px-3 py-1.5 rounded-xl uppercase tracking-widest">{filteredItems.length} items</span>
+            <span className="text-gray-700 text-[8px] font-black bg-white/5 border border-white/5 px-2.5 py-1 rounded-lg uppercase tracking-widest">{filteredItems.length} items</span>
           </div>
 
           {filteredItems.map(item => (
             <div 
               key={item.id} 
               onClick={() => toggleItem(item.id)}
-              className={`menu-card rounded-[2.2rem] p-7 border transition-all duration-300 active:scale-[0.98] cursor-pointer animate-item flex flex-col gap-5 ${
-                selectedIds.has(item.id) ? 'border-[#ff3d2e]/40 bg-[#ff3d2e]/5 shadow-[0_15px_40px_rgba(255,61,46,0.15)]' : 'border-white/5'
+              className={`menu-card rounded-[1.8rem] p-5 border transition-all duration-300 active:scale-[0.98] cursor-pointer animate-item flex flex-col gap-3.5 ${
+                selectedIds.has(item.id) ? 'border-[#ff3d2e]/40 bg-[#ff3d2e]/5 shadow-[0_10px_30px_rgba(255,61,46,0.15)]' : 'border-white/5'
               }`}
             >
               <div className="flex justify-between items-start">
                 <div className="flex-1">
-                  <h3 className="text-xl font-black text-white leading-tight mb-1">{item.nameEn}</h3>
-                  <h4 className="font-eth text-xl text-[#ff3d2e] font-black tracking-tight">{item.nameAm}</h4>
+                  <h3 className="text-sm font-black text-white leading-tight mb-0.5">{item.nameEn}</h3>
+                  <h4 className="font-eth text-sm text-[#ff3d2e] font-black tracking-tight">{item.nameAm}</h4>
                 </div>
                 <div className="text-right flex flex-col items-end">
-                  <span className="text-3xl font-[1000] text-white tracking-tighter leading-none">{formatPrice(item.price)}</span>
-                  <span className="text-[10px] font-black text-gray-600 uppercase mt-2 tracking-widest">ETB</span>
+                  <span className="text-xl font-[1000] text-white tracking-tighter leading-none">{formatPrice(item.price)}</span>
+                  <span className="text-[8px] font-black text-gray-600 uppercase mt-1 tracking-widest">ETB</span>
                 </div>
               </div>
               {item.tags && item.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-wrap gap-2">
                   {item.tags.map(t => <Tag key={t} text={t} />)}
                 </div>
               )}
@@ -396,79 +399,80 @@ const App = () => {
           ))}
 
           {filteredItems.length === 0 && (
-            <div className="py-28 text-center">
-              <div className="text-5xl mb-6 grayscale opacity-40">🍽️</div>
-              <p className="text-gray-700 font-black uppercase tracking-widest text-sm">No items matching your search</p>
+            <div className="py-20 text-center">
+              <div className="text-4xl mb-4 grayscale opacity-40">🍽️</div>
+              <p className="text-gray-700 font-black uppercase tracking-widest text-[10px]">No results</p>
             </div>
           )}
         </main>
 
-        <footer className="mt-32 pt-20 pb-40 border-t border-white/5 text-center bg-[#070707] rounded-t-[3.5rem]">
-          <div className="px-10 mb-20">
-            <p className="text-[#ff3d2e] text-[10px] font-black uppercase tracking-[0.4em] mb-4 opacity-70">Comments & Feedback</p>
-            <a href="tel:+251938222226" className="inline-block text-white text-3xl font-[1000] tracking-tighter hover:text-[#ff3d2e] transition-colors active:scale-95">
+        {/* FOOTER */}
+        <footer className="mt-24 pt-16 pb-32 border-t border-white/5 text-center bg-[#070707] rounded-t-[3rem]">
+          <div className="px-10 mb-16">
+            <p className="text-[#ff3d2e] text-[8px] font-black uppercase tracking-[0.4em] mb-3 opacity-70">Comments & Feedback</p>
+            <a href="tel:+251938222226" className="inline-block text-white text-xl font-[1000] tracking-tighter hover:text-[#ff3d2e] transition-colors active:scale-95">
               +251 938 222 226
             </a>
           </div>
 
-          <div className="max-w-sm mx-auto mb-16 p-10 rounded-[3rem] bg-white/[0.04] border border-white/10 shadow-2xl relative overflow-hidden group text-center">
-            <p className="text-[#5c7cfa] text-[9px] font-black tracking-[0.5em] mb-4 uppercase opacity-80">Technology Partner</p>
-            <h5 className="text-white text-xl font-[1000] mb-3 tracking-tighter">WEZK TECHNOLOGIES</h5>
-            <div className="space-y-2 mb-10">
-              <p className="text-gray-400 text-xs font-medium italic opacity-90">"If you want any websites contact Us"</p>
-              <p className="font-eth text-gray-500 text-xs font-medium italic">"ማንኛውንም ድረ-ገጽ ከፈለጉ እኛን ያነጋግሩን"</p>
+          <div className="max-w-[280px] mx-auto mb-12 p-8 rounded-[2.5rem] bg-white/[0.04] border border-white/10 shadow-2xl relative overflow-hidden group text-center">
+            <p className="text-[#5c7cfa] text-[8px] font-black tracking-[0.5em] mb-3 uppercase opacity-80">Tech Partner</p>
+            <h5 className="text-white text-base font-[1000] mb-2 tracking-tighter">WEZK TECHNOLOGIES</h5>
+            <div className="space-y-1.5 mb-8">
+              <p className="text-gray-400 text-[10px] font-medium italic opacity-90">"If you want any websites contact Us"</p>
+              <p className="font-eth text-gray-500 text-[10px] font-medium italic">"ማንኛውንም ድረ-ገጽ ከፈለጉ እኛን ያነጋግሩን"</p>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <a href="https://t.me/yonnyw7" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 bg-white/5 border border-white/10 px-5 py-4 rounded-2xl text-[10px] font-black text-white hover:bg-[#5c7cfa] transition-all active:scale-90">TELEGRAM</a>
-              <a href="tel:+251938007979" className="flex items-center justify-center gap-3 bg-white/5 border border-white/10 px-5 py-4 rounded-2xl text-[10px] font-black text-white hover:bg-white/10 transition-all active:scale-90">CONTACT</a>
+            <div className="grid grid-cols-2 gap-3">
+              <a href="https://t.me/yonnyw7" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 px-3 py-3 rounded-xl text-[9px] font-black text-white hover:bg-[#5c7cfa] transition-all active:scale-90 uppercase">Telegram</a>
+              <a href="tel:+251938007979" className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 px-3 py-3 rounded-xl text-[9px] font-black text-white hover:bg-white/10 transition-all active:scale-90 uppercase">Contact</a>
             </div>
           </div>
 
-          <p className="text-gray-800 text-[10px] font-black uppercase tracking-[0.6em]">&copy; {new Date().getFullYear()} MALDYOR HOTEL</p>
+          <p className="text-gray-800 text-[8px] font-black uppercase tracking-[0.6em]">&copy; {new Date().getFullYear()} MALDYOR HOTEL</p>
         </footer>
       </div>
 
       {/* CART MODAL */}
       {isCartOpen && (
-        <div className="fixed inset-0 z-[120] animate-fade" onClick={() => setIsCartOpen(false)}>
-          <div className="absolute inset-0 bg-black/80 backdrop-blur-xl"></div>
-          <div className="absolute bottom-0 left-0 right-0 max-w-lg mx-auto bg-[#1a1a1a] rounded-t-[3rem] border-t border-white/10 shadow-2xl p-8 pb-12 animate-item max-h-[85vh] flex flex-col" onClick={e => e.stopPropagation()}>
-            <div className="w-12 h-1.5 bg-white/10 rounded-full mx-auto mb-8"></div>
+        <div className="fixed inset-0 z-[120] animate-fade flex items-end justify-center" onClick={() => setIsCartOpen(false)}>
+          <div className="absolute inset-0 bg-black/85 backdrop-blur-xl"></div>
+          <div className="absolute bottom-0 left-0 right-0 max-w-lg mx-auto bg-[#1a1a1a] rounded-t-[2.5rem] border-t border-white/10 shadow-2xl p-6 pb-10 animate-item max-h-[85vh] flex flex-col" onClick={e => e.stopPropagation()}>
+            <div className="w-10 h-1 bg-white/10 rounded-full mx-auto mb-6"></div>
             
-            <div className="flex justify-between items-center mb-8">
-              <h3 className="text-2xl font-black text-white uppercase tracking-tight">Your Selection</h3>
-              <button onClick={() => setIsCartOpen(false)} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 text-white active:scale-90">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" /></svg>
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-lg font-black text-white uppercase tracking-tight">Your Selection</h3>
+              <button onClick={() => setIsCartOpen(false)} className="w-9 h-9 flex items-center justify-center rounded-full bg-white/5 text-white active:scale-90">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto pr-2 space-y-6 hide-scrollbar mb-8">
+            <div className="flex-1 overflow-y-auto pr-2 space-y-4 hide-scrollbar mb-6">
               {selectedObjects.map(item => (
-                <div key={item.id} className="flex justify-between items-center group">
+                <div key={item.id} className="flex justify-between items-center group bg-white/5 p-4 rounded-2xl">
                   <div className="flex-1">
-                    <p className="text-white font-bold text-lg leading-tight">{item.nameEn}</p>
-                    <p className="font-eth text-[#ff3d2e] font-semibold text-sm">{item.nameAm}</p>
+                    <p className="text-white font-bold text-sm leading-tight">{item.nameEn}</p>
+                    <p className="font-eth text-[#ff3d2e] font-semibold text-[11px]">{item.nameAm}</p>
                   </div>
-                  <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-4">
                     <div className="text-right">
-                      <p className="text-white font-black text-lg">{formatPrice(item.price)}</p>
-                      <p className="text-[9px] text-gray-500 font-bold uppercase tracking-widest">ETB</p>
+                      <p className="text-white font-black text-sm">{formatPrice(item.price)}</p>
+                      <p className="text-[8px] text-gray-500 font-bold uppercase tracking-widest">ETB</p>
                     </div>
-                    <button onClick={() => toggleItem(item.id)} className="w-8 h-8 flex items-center justify-center rounded-lg bg-red-500/10 text-red-500 active:scale-90">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    <button onClick={() => toggleItem(item.id)} className="w-7 h-7 flex items-center justify-center rounded-lg bg-red-500/10 text-red-500 active:scale-90">
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                     </button>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="bg-[#ff3d2e] rounded-3xl p-6 flex justify-between items-center shadow-[0_20px_40px_rgba(255,61,46,0.2)]">
+            <div className="bg-[#ff3d2e] rounded-[1.8rem] p-5 flex justify-between items-center shadow-[0_15px_30px_rgba(255,61,46,0.2)]">
               <div className="flex flex-col">
-                <span className="text-[10px] font-black text-white/60 uppercase tracking-widest mb-1">Total Amount</span>
-                <span className="text-3xl font-[1000] text-white tracking-tighter">{formatPrice(totalPrice)} <span className="text-sm font-bold">ETB</span></span>
+                <span className="text-[8px] font-black text-white/60 uppercase tracking-widest mb-0.5">Total Amount</span>
+                <span className="text-xl font-[1000] text-white tracking-tighter">{formatPrice(totalPrice)} <span className="text-xs font-bold">ETB</span></span>
               </div>
-              <button onClick={() => { setSelectedIds(new Set()); setIsCartOpen(false); }} className="bg-black text-white px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest active:scale-95 shadow-xl">
-                Clear All
+              <button onClick={() => { setSelectedIds(new Set()); setIsCartOpen(false); }} className="bg-black text-white px-4 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest active:scale-95 shadow-xl">
+                Clear
               </button>
             </div>
           </div>
@@ -477,21 +481,21 @@ const App = () => {
 
       {/* SUMMARY TRAY (Clickable) */}
       {selectedCount > 0 && !isCartOpen && (
-        <div className="fixed bottom-0 left-0 right-0 z-[100] p-6 pointer-events-none animate-fade">
+        <div className="fixed bottom-0 left-0 right-0 z-[100] p-5 pointer-events-none animate-fade flex justify-center">
           <div 
             onClick={() => setIsCartOpen(true)}
-            className="max-w-md mx-auto bg-[#ff3d2e] rounded-[2.5rem] p-6 shadow-[0_30px_70px_rgba(255,61,46,0.4)] flex items-center justify-between pointer-events-auto active:scale-95 transition-all cursor-pointer group"
+            className="w-full max-w-[340px] bg-[#ff3d2e] rounded-[2rem] p-5 shadow-[0_20px_50px_rgba(255,61,46,0.4)] flex items-center justify-between pointer-events-auto active:scale-95 transition-all cursor-pointer group"
           >
             <div className="flex flex-col">
-              <span className="text-[10px] font-black text-white/60 uppercase tracking-widest mb-1">Estimated Total</span>
-              <span className="text-3xl font-[1000] text-white tracking-tighter">{formatPrice(totalPrice)} <span className="text-sm font-bold opacity-80">ETB</span></span>
+              <span className="text-[8px] font-black text-white/60 uppercase tracking-widest mb-0.5">Selection Total</span>
+              <span className="text-xl font-[1000] text-white tracking-tighter">{formatPrice(totalPrice)} <span className="text-xs font-bold opacity-80">ETB</span></span>
             </div>
-            <div className="flex items-center gap-4">
-               <span className="bg-black/20 text-white text-[10px] font-black px-4 py-2 rounded-full border border-white/10 group-hover:bg-black/30 transition-colors">
+            <div className="flex items-center gap-3">
+               <span className="bg-black/20 text-white text-[8px] font-black px-3 py-1.5 rounded-full border border-white/10 group-hover:bg-black/30 transition-colors">
                 {selectedCount} {selectedCount === 1 ? 'ITEM' : 'ITEMS'}
                </span>
-               <div className="bg-white/20 p-2.5 rounded-full group-hover:bg-white/30 transition-colors">
-                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 15l7-7 7 7" /></svg>
+               <div className="bg-white/20 p-2 rounded-full group-hover:bg-white/30 transition-colors">
+                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 15l7-7 7 7" /></svg>
                </div>
             </div>
           </div>
