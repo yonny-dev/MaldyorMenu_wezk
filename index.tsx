@@ -108,7 +108,7 @@ const MENU_ITEMS: MenuItem[] = [
   { id: 'cy1', nameEn: 'Lamb curry', nameAm: 'ላምብ ኬሪ', price: 550, category: 'Curry', tags: ['Meat'] },
   { id: 'cy2', nameEn: 'Beef curry', nameAm: 'ቢፍ ኬሪ', price: 500, category: 'Curry', tags: ['Meat'] },
   { id: 'cy3', nameEn: 'Chicken curry', nameAm: 'ችክን ኬሪ', price: 550, category: 'Curry', tags: ['Popular'] },
-  { id: 'cy5', nameEn: 'Stir fried fish', nameAm: 'ስቲር ፍራይድ ፊッシュ', price: 550, category: 'Curry', tags: ['Fish'] },
+  { id: 'cy5', nameEn: 'Stir fried fish', nameAm: 'ስቲር ፍራይድ ፊሽ', price: 550, category: 'Curry', tags: ['Fish'] },
   { id: 'cy6', nameEn: 'Stir fried beef', nameAm: 'ስቲር ፍራይድ ቢፍ', price: 550, category: 'Curry', tags: ['Meat'] },
   // Chicken Category
   { id: 'ch1', nameEn: 'Chicken breast', nameAm: 'ችክን ብረስት', price: 550, category: 'Chicken' },
@@ -234,7 +234,8 @@ const MENU_ITEMS: MenuItem[] = [
 
 // --- COMPONENTS ---
 
-const Tag = ({ text }: { text: string }) => {
+// Fix: Typing Tag as React.FC to handle React-standard props like 'key' in list renderings
+const Tag: React.FC<{ text: string }> = ({ text }) => {
   const isFasting = text === 'Fasting';
   const isMeat = text === 'Meat';
   const isPopular = text === 'Popular';
@@ -261,24 +262,24 @@ const Tag = ({ text }: { text: string }) => {
 };
 
 const Header = () => (
-  <header className="pt-10 pb-8 px-6 bg-[#0c0c0c] flex flex-col items-center">
-    <div className="relative mb-6">
-      <div className="w-12 h-12 flex items-center justify-center relative">
-        <span className="absolute -top-2 text-[#d4af37] text-base animate-bounce">👑</span>
+  <header className="pt-10 md:pt-16 pb-8 md:pb-12 px-6 bg-[#0c0c0c] flex flex-col items-center">
+    <div className="relative mb-6 md:mb-10">
+      <div className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center relative">
+        <span className="absolute -top-2 md:-top-3 text-[#d4af37] text-base md:text-xl animate-bounce">👑</span>
         <div className="font-black text-[#d4af37] italic flex items-baseline select-none">
-          <span className="text-3xl leading-none">K</span>
-          <span className="text-lg leading-none -ml-1">E</span>
+          <span className="text-3xl md:text-5xl leading-none">K</span>
+          <span className="text-lg md:text-2xl leading-none -ml-1">E</span>
         </div>
-        <div className="absolute inset-0 border border-[#d4af37]/30 rounded-full scale-125 animate-pulse"></div>
+        <div className="absolute inset-0 border border-[#d4af37]/30 rounded-full scale-125 md:scale-150 animate-pulse"></div>
       </div>
     </div>
     <div className="text-center">
-      <h1 className="text-2xl font-black tracking-tighter text-[#ff3d2e] uppercase leading-none mb-1">MALDYOR HOTEL</h1>
-      <h2 className="font-eth text-lg font-black text-[#ff3d2e] tracking-tight leading-tight">ማልድዮር ሆቴል</h2>
-      <div className="mt-3 flex items-center justify-center gap-3">
-        <span className="h-px w-8 bg-[#ff3d2e]/30"></span>
-        <span className="text-[8px] text-gray-500 uppercase tracking-[0.4em] font-bold">ALAMATA</span>
-        <span className="h-px w-8 bg-[#ff3d2e]/30"></span>
+      <h1 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tighter text-[#ff3d2e] uppercase leading-none mb-1 md:mb-2">MALDYOR HOTEL</h1>
+      <h2 className="font-eth text-lg md:text-2xl lg:text-3xl font-black text-[#ff3d2e] tracking-tight leading-tight">ማልድዮር ሆቴል</h2>
+      <div className="mt-3 md:mt-6 flex items-center justify-center gap-3 md:gap-5">
+        <span className="h-px w-8 md:w-12 bg-[#ff3d2e]/30"></span>
+        <span className="text-[8px] md:text-[10px] text-gray-500 uppercase tracking-[0.4em] font-bold">ALAMATA</span>
+        <span className="h-px w-8 md:w-12 bg-[#ff3d2e]/30"></span>
       </div>
     </div>
   </header>
@@ -317,20 +318,21 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-[#0c0c0c] flex flex-col items-center pb-32">
-      <div className="w-full max-w-lg mx-auto">
+      {/* Root Layout Container */}
+      <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <Header />
 
         {/* SEARCH BAR */}
-        <div className="px-5 mb-6">
-          <div className="relative group">
+        <div className="flex justify-center mb-8">
+          <div className="relative group w-full max-w-xl">
             <input 
               type="text" 
-              placeholder="Search dishes..."
+              placeholder="Search dishes... / ምግቦችን ይፈልጉ..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-xl py-3.5 pl-11 pr-10 text-xs text-white focus:outline-none focus:border-[#ff3d2e]/50 transition-all placeholder:text-gray-700 shadow-2xl"
+              className="w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl py-3.5 md:py-4 pl-11 md:pl-14 pr-10 text-[11px] md:text-sm text-white focus:outline-none focus:border-[#ff3d2e]/50 transition-all placeholder:text-gray-700 shadow-2xl"
             />
-            <svg className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-gray-700 group-focus-within:text-[#ff3d2e] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 md:w-5 md:h-5 absolute left-4 md:left-5 top-1/2 -translate-y-1/2 text-gray-700 group-focus-within:text-[#ff3d2e] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             {search && (
@@ -343,7 +345,7 @@ const App = () => {
 
         {/* CATEGORY NAV */}
         {!search && (
-          <nav className="sticky top-0 z-50 sticky-nav py-4 px-4 border-b border-white/5 overflow-x-auto hide-scrollbar flex gap-2.5 shadow-2xl">
+          <nav className="sticky top-0 z-50 sticky-nav py-4 md:py-6 px-4 border-b border-white/5 overflow-x-auto hide-scrollbar flex gap-2.5 md:gap-4 md:justify-center shadow-2xl">
             {CATEGORIES.map(cat => (
               <button
                 key={cat}
@@ -351,151 +353,155 @@ const App = () => {
                   setActiveCategory(cat);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className={`px-4 py-2.5 rounded-xl whitespace-nowrap text-[10px] font-black transition-all duration-300 transform flex items-center gap-1.5 ${
+                className={`px-4 py-2.5 md:px-6 md:py-3.5 rounded-xl whitespace-nowrap text-[9px] md:text-[11px] font-black transition-all duration-300 transform flex items-center gap-1.5 md:gap-2 ${
                   activeCategory === cat ? 'bg-[#ff3d2e] text-white shadow-lg shadow-[#ff3d2e]/20 -translate-y-0.5' : 'bg-white/5 text-gray-500 hover:text-gray-300'
                 }`}
               >
-                <span className="text-xs">{CATEGORY_EMOJIS[cat]}</span>
+                <span className="text-xs md:text-sm">{CATEGORY_EMOJIS[cat]}</span>
                 {cat.toUpperCase()}
               </button>
             ))}
           </nav>
         )}
 
-        {/* MENU LIST */}
-        <main className="px-6 mt-8 space-y-4">
-          <div className="flex items-center justify-between mb-6 px-1">
-            <h2 className="text-lg font-black text-white uppercase tracking-tight flex items-center gap-2">
-              {!search && <span className="opacity-80 text-base">{CATEGORY_EMOJIS[activeCategory]}</span>}
+        {/* MENU LIST GRID */}
+        <main className="mt-8 md:mt-12">
+          <div className="flex items-center justify-between mb-8 px-2">
+            <h2 className="text-lg md:text-2xl font-black text-white uppercase tracking-tight flex items-center gap-2 md:gap-3">
+              {!search && <span className="opacity-80 text-base md:text-2xl">{CATEGORY_EMOJIS[activeCategory]}</span>}
               {search ? 'Search' : activeCategory}
             </h2>
-            <span className="text-gray-700 text-[8px] font-black bg-white/5 border border-white/5 px-2.5 py-1 rounded-lg uppercase tracking-widest">{filteredItems.length} items</span>
+            <span className="text-gray-700 text-[8px] md:text-[10px] font-black bg-white/5 border border-white/5 px-2.5 py-1 rounded-lg md:rounded-xl uppercase tracking-widest">{filteredItems.length} items</span>
           </div>
 
-          {filteredItems.map(item => (
-            <div 
-              key={item.id} 
-              onClick={() => toggleItem(item.id)}
-              className={`menu-card rounded-[1.8rem] p-5 border transition-all duration-300 active:scale-[0.98] cursor-pointer animate-item flex flex-col gap-3.5 ${
-                selectedIds.has(item.id) ? 'border-[#ff3d2e]/40 bg-[#ff3d2e]/5 shadow-[0_10px_30px_rgba(255,61,46,0.15)]' : 'border-white/5'
-              }`}
-            >
-              <div className="flex justify-between items-start">
-                <div className="flex-1">
-                  <h3 className="text-sm font-black text-white leading-tight mb-0.5">{item.nameEn}</h3>
-                  <h4 className="font-eth text-sm text-[#ff3d2e] font-black tracking-tight">{item.nameAm}</h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {filteredItems.map(item => (
+              <div 
+                key={item.id} 
+                onClick={() => toggleItem(item.id)}
+                className={`menu-card rounded-[1.8rem] md:rounded-[2.2rem] p-5 md:p-6 border transition-all duration-300 active:scale-[0.98] cursor-pointer animate-item flex flex-col gap-3.5 md:gap-5 h-full ${
+                  selectedIds.has(item.id) ? 'border-[#ff3d2e]/40 bg-[#ff3d2e]/5 shadow-[0_10px_30px_rgba(255,61,46,0.15)]' : 'border-white/5'
+                }`}
+              >
+                <div className="flex justify-between items-start">
+                  <div className="flex-1">
+                    <h3 className="text-sm md:text-base font-black text-white leading-tight mb-0.5">{item.nameEn}</h3>
+                    <h4 className="font-eth text-sm md:text-base text-[#ff3d2e] font-black tracking-tight">{item.nameAm}</h4>
+                  </div>
+                  <div className="text-right flex flex-col items-end">
+                    <span className="text-xl md:text-2xl font-[1000] text-white tracking-tighter leading-none">{formatPrice(item.price)}</span>
+                    <span className="text-[8px] font-black text-gray-600 uppercase mt-1 tracking-widest">ETB</span>
+                  </div>
                 </div>
-                <div className="text-right flex flex-col items-end">
-                  <span className="text-xl font-[1000] text-white tracking-tighter leading-none">{formatPrice(item.price)}</span>
-                  <span className="text-[8px] font-black text-gray-600 uppercase mt-1 tracking-widest">ETB</span>
-                </div>
+                {item.tags && item.tags.length > 0 && (
+                  <div className="mt-auto flex flex-wrap gap-2">
+                    {item.tags.map(t => <Tag key={t} text={t} />)}
+                  </div>
+                )}
               </div>
-              {item.tags && item.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {item.tags.map(t => <Tag key={t} text={t} />)}
-                </div>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
 
           {filteredItems.length === 0 && (
-            <div className="py-20 text-center">
-              <div className="text-4xl mb-4 grayscale opacity-40">🍽️</div>
-              <p className="text-gray-700 font-black uppercase tracking-widest text-[10px]">No results</p>
+            <div className="py-24 text-center">
+              <div className="text-4xl md:text-6xl mb-4 grayscale opacity-40 animate-pulse">🍽️</div>
+              <p className="text-gray-700 font-black uppercase tracking-widest text-[10px] md:text-xs">No results matching your search</p>
             </div>
           )}
         </main>
 
         {/* FOOTER */}
-        <footer className="mt-24 pt-16 pb-32 border-t border-white/5 text-center bg-[#070707] rounded-t-[3rem]">
-          <div className="px-10 mb-16">
-            <p className="text-[#ff3d2e] text-[8px] font-black uppercase tracking-[0.4em] mb-3 opacity-70">Comments & Feedback</p>
-            <a href="tel:+251938222226" className="inline-block text-white text-xl font-[1000] tracking-tighter hover:text-[#ff3d2e] transition-colors active:scale-95">
-              +251 938 222 226
-            </a>
+        <footer className="mt-24 md:mt-32 pt-16 md:pt-24 pb-32 border-t border-white/5 bg-[#070707] rounded-t-[3rem] md:rounded-t-[4rem]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 max-w-4xl mx-auto px-6 mb-20">
+            <div className="text-center md:text-left flex flex-col justify-center">
+              <p className="text-[#ff3d2e] text-[8px] md:text-[10px] font-black uppercase tracking-[0.4em] mb-3 opacity-70">Comments & Feedback</p>
+              <a href="tel:+251938222226" className="inline-block text-white text-xl md:text-3xl font-[1000] tracking-tighter hover:text-[#ff3d2e] transition-colors active:scale-95">
+                +251 938 222 226
+              </a>
+            </div>
+
+            <div className="p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] bg-white/[0.04] border border-white/10 shadow-2xl relative overflow-hidden group text-center">
+              <p className="text-[#5c7cfa] text-[8px] md:text-[10px] font-black tracking-[0.5em] mb-3 uppercase opacity-80">Tech Partner</p>
+              <h5 className="text-white text-base md:text-lg font-[1000] mb-2 tracking-tighter">WEZK TECHNOLOGIES</h5>
+              <div className="space-y-1.5 mb-8">
+                <p className="text-gray-400 text-[10px] font-medium italic opacity-90">"If you want any websites contact Us"</p>
+                <p className="font-eth text-gray-500 text-[10px] font-medium italic">"ማንኛውንም ድረ-ገጽ ከፈለጉ እኛን ያነጋግሩን"</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <a href="https://t.me/yonnyw7" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 px-3 py-3 rounded-xl text-[9px] font-black text-white hover:bg-[#5c7cfa] transition-all active:scale-90 uppercase">Telegram</a>
+                <a href="tel:+251938007979" className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 px-3 py-3 rounded-xl text-[9px] font-black text-white hover:bg-white/10 transition-all active:scale-90 uppercase">Contact</a>
+              </div>
+            </div>
           </div>
 
-          <div className="max-w-[280px] mx-auto mb-12 p-8 rounded-[2.5rem] bg-white/[0.04] border border-white/10 shadow-2xl relative overflow-hidden group text-center">
-            <p className="text-[#5c7cfa] text-[8px] font-black tracking-[0.5em] mb-3 uppercase opacity-80">Tech Partner</p>
-            <h5 className="text-white text-base font-[1000] mb-2 tracking-tighter">WEZK TECHNOLOGIES</h5>
-            <div className="space-y-1.5 mb-8">
-              <p className="text-gray-400 text-[10px] font-medium italic opacity-90">"If you want any websites contact Us"</p>
-              <p className="font-eth text-gray-500 text-[10px] font-medium italic">"ማንኛውንም ድረ-ገጽ ከፈለጉ እኛን ያነጋግሩን"</p>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              <a href="https://t.me/yonnyw7" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 px-3 py-3 rounded-xl text-[9px] font-black text-white hover:bg-[#5c7cfa] transition-all active:scale-90 uppercase">Telegram</a>
-              <a href="tel:+251938007979" className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 px-3 py-3 rounded-xl text-[9px] font-black text-white hover:bg-white/10 transition-all active:scale-90 uppercase">Contact</a>
-            </div>
-          </div>
-
-          <p className="text-gray-800 text-[8px] font-black uppercase tracking-[0.6em]">&copy; {new Date().getFullYear()} MALDYOR HOTEL</p>
+          <p className="text-gray-800 text-[8px] md:text-[10px] font-black text-center uppercase tracking-[0.6em]">&copy; {new Date().getFullYear()} MALDYOR HOTEL</p>
         </footer>
       </div>
 
       {/* CART MODAL */}
       {isCartOpen && (
-        <div className="fixed inset-0 z-[120] animate-fade flex items-end justify-center" onClick={() => setIsCartOpen(false)}>
+        <div className="fixed inset-0 z-[120] animate-fade flex items-end md:items-center justify-center" onClick={() => setIsCartOpen(false)}>
           <div className="absolute inset-0 bg-black/85 backdrop-blur-xl"></div>
-          <div className="absolute bottom-0 left-0 right-0 max-w-lg mx-auto bg-[#1a1a1a] rounded-t-[2.5rem] border-t border-white/10 shadow-2xl p-6 pb-10 animate-item max-h-[85vh] flex flex-col" onClick={e => e.stopPropagation()}>
-            <div className="w-10 h-1 bg-white/10 rounded-full mx-auto mb-6"></div>
+          <div className="absolute bottom-0 md:relative md:bottom-auto left-0 right-0 md:left-auto md:right-auto w-full md:max-w-2xl bg-[#1a1a1a] rounded-t-[2.5rem] md:rounded-[3rem] border-t md:border border-white/10 shadow-2xl p-6 md:p-10 pb-10 animate-item max-h-[85vh] md:max-h-[90vh] flex flex-col" onClick={e => e.stopPropagation()}>
+            <div className="w-10 h-1 bg-white/10 rounded-full mx-auto mb-6 md:hidden"></div>
             
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-lg font-black text-white uppercase tracking-tight">Your Selection</h3>
-              <button onClick={() => setIsCartOpen(false)} className="w-9 h-9 flex items-center justify-center rounded-full bg-white/5 text-white active:scale-90">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" /></svg>
+              <h3 className="text-lg md:text-2xl font-black text-white uppercase tracking-tight">Your Selection</h3>
+              <button onClick={() => setIsCartOpen(false)} className="w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-full bg-white/5 text-white hover:bg-white/10 transition-colors active:scale-90">
+                <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
 
             <div className="flex-1 overflow-y-auto pr-2 space-y-4 hide-scrollbar mb-6">
               {selectedObjects.map(item => (
-                <div key={item.id} className="flex justify-between items-center group bg-white/5 p-4 rounded-2xl">
+                <div key={item.id} className="flex justify-between items-center group bg-white/5 p-4 md:p-5 rounded-2xl md:rounded-3xl border border-transparent hover:border-white/5 transition-colors">
                   <div className="flex-1">
-                    <p className="text-white font-bold text-sm leading-tight">{item.nameEn}</p>
-                    <p className="font-eth text-[#ff3d2e] font-semibold text-[11px]">{item.nameAm}</p>
+                    <p className="text-white font-bold text-sm md:text-base leading-tight">{item.nameEn}</p>
+                    <p className="font-eth text-[#ff3d2e] font-semibold text-[11px] md:text-sm">{item.nameAm}</p>
                   </div>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4 md:gap-8">
                     <div className="text-right">
-                      <p className="text-white font-black text-sm">{formatPrice(item.price)}</p>
-                      <p className="text-[8px] text-gray-500 font-bold uppercase tracking-widest">ETB</p>
+                      <p className="text-white font-black text-sm md:text-lg">{formatPrice(item.price)}</p>
+                      <p className="text-[8px] md:text-[9px] text-gray-500 font-bold uppercase tracking-widest">ETB</p>
                     </div>
-                    <button onClick={() => toggleItem(item.id)} className="w-7 h-7 flex items-center justify-center rounded-lg bg-red-500/10 text-red-500 active:scale-90">
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    <button onClick={() => toggleItem(item.id)} className="w-7 h-7 md:w-9 md:h-9 flex items-center justify-center rounded-lg md:rounded-xl bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-colors active:scale-90">
+                      <svg className="w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                     </button>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="bg-[#ff3d2e] rounded-[1.8rem] p-5 flex justify-between items-center shadow-[0_15px_30px_rgba(255,61,46,0.2)]">
+            <div className="bg-[#ff3d2e] rounded-[1.8rem] md:rounded-[2.5rem] p-5 md:p-8 flex justify-between items-center shadow-[0_15px_30px_rgba(255,61,46,0.2)]">
               <div className="flex flex-col">
-                <span className="text-[8px] font-black text-white/60 uppercase tracking-widest mb-0.5">Total Amount</span>
-                <span className="text-xl font-[1000] text-white tracking-tighter">{formatPrice(totalPrice)} <span className="text-xs font-bold">ETB</span></span>
+                <span className="text-[8px] md:text-[10px] font-black text-white/60 uppercase tracking-widest mb-0.5">Total Amount</span>
+                <span className="text-xl md:text-3xl font-[1000] text-white tracking-tighter">{formatPrice(totalPrice)} <span className="text-xs md:text-base font-bold">ETB</span></span>
               </div>
-              <button onClick={() => { setSelectedIds(new Set()); setIsCartOpen(false); }} className="bg-black text-white px-4 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest active:scale-95 shadow-xl">
-                Clear
+              <button onClick={() => { setSelectedIds(new Set()); setIsCartOpen(false); }} className="bg-black text-white px-5 py-3 md:px-8 md:py-4 rounded-xl md:rounded-2xl text-[9px] md:text-xs font-black uppercase tracking-widest active:scale-95 shadow-xl transition-transform hover:scale-105">
+                Clear Selection
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* SUMMARY TRAY (Clickable) */}
+      {/* SUMMARY TRAY (Floating Center) */}
       {selectedCount > 0 && !isCartOpen && (
-        <div className="fixed bottom-0 left-0 right-0 z-[100] p-5 pointer-events-none animate-fade flex justify-center">
+        <div className="fixed bottom-0 left-0 right-0 z-[100] p-5 md:p-8 pointer-events-none animate-fade flex justify-center">
           <div 
             onClick={() => setIsCartOpen(true)}
-            className="w-full max-w-[340px] bg-[#ff3d2e] rounded-[2rem] p-5 shadow-[0_20px_50px_rgba(255,61,46,0.4)] flex items-center justify-between pointer-events-auto active:scale-95 transition-all cursor-pointer group"
+            className="w-full max-w-[340px] md:max-w-[420px] bg-[#ff3d2e] rounded-[2rem] md:rounded-[3rem] p-5 md:p-6 shadow-[0_20px_50px_rgba(255,61,46,0.4)] flex items-center justify-between pointer-events-auto active:scale-95 transition-all cursor-pointer group hover:bg-[#ff4f40]"
           >
             <div className="flex flex-col">
-              <span className="text-[8px] font-black text-white/60 uppercase tracking-widest mb-0.5">Selection Total</span>
-              <span className="text-xl font-[1000] text-white tracking-tighter">{formatPrice(totalPrice)} <span className="text-xs font-bold opacity-80">ETB</span></span>
+              <span className="text-[8px] md:text-[10px] font-black text-white/60 uppercase tracking-widest mb-0.5">Selection Total</span>
+              <span className="text-xl md:text-3xl font-[1000] text-white tracking-tighter">{formatPrice(totalPrice)} <span className="text-xs md:text-base font-bold opacity-80">ETB</span></span>
             </div>
-            <div className="flex items-center gap-3">
-               <span className="bg-black/20 text-white text-[8px] font-black px-3 py-1.5 rounded-full border border-white/10 group-hover:bg-black/30 transition-colors">
+            <div className="flex items-center gap-3 md:gap-5">
+               <span className="bg-black/20 text-white text-[8px] md:text-[10px] font-black px-3 py-1.5 md:px-5 md:py-2.5 rounded-full border border-white/10 group-hover:bg-black/30 transition-colors">
                 {selectedCount} {selectedCount === 1 ? 'ITEM' : 'ITEMS'}
                </span>
-               <div className="bg-white/20 p-2 rounded-full group-hover:bg-white/30 transition-colors">
-                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 15l7-7 7 7" /></svg>
+               <div className="bg-white/20 p-2 md:p-3 rounded-full group-hover:bg-white/30 transition-colors">
+                 <svg className="w-5 h-5 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 15l7-7 7 7" /></svg>
                </div>
             </div>
           </div>
